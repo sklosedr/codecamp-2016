@@ -13,4 +13,11 @@
 	
 	<artifactId>codecamp-2016-model</artifactId>
 	
+	<dependencies>
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>persistence-api</artifactId>
+		</dependency>
+	</dependencies>
+	
 </project>

@@ -9,6 +9,7 @@ target/
 # Eclipse
 .project
 .settings/
+.classpath
 
 # Package Files #
 *.jar
