@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.next-level-integration</groupId>
+    <artifactId>codecamp-2016</artifactId>
+    <version>1.0.0</version>
+	<packaging>pom</packaging>
+	
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.1.RELEASE</version>
+    </parent>
+    
+	<properties>
+		<java.version>1.8</java.version>
+		<codecamp-2016.version>1.0.0</codecamp-2016.version>
+	</properties>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<artifactId>codecamp-2016-model</artifactId>
+				<groupId>com.next-level-integration</groupId>
+				<version>${codecamp-2016.version}</version>
+			</dependency>
+			<dependency>
+			    <groupId>org.apache.commons</groupId>
+			    <artifactId>commons-collections4</artifactId>
+			    <version>4.1</version>
+			</dependency>
+			<dependency>
+			    <groupId>javax.persistence</groupId>
+			    <artifactId>persistence-api</artifactId>
+			    <version>1.0</version>
+			</dependency>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-dependencies</artifactId>
+	            <version>Brixton.SR6</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+		</dependencies>
+	</dependencyManagement>
+    
+
+	<modules>
+		<module>codecamp-2016-dog-service</module>
+		<module>codecamp-2016-model</module>
+		<module>codecamp-2016-register-service</module>
+		<module>codecamp-2016-user-service</module>
+		<module>codecamp-2016-service-registry</module>
+		<module>codecamp-2016-webapp</module>
+	</modules>
+
+    
+</project>    
