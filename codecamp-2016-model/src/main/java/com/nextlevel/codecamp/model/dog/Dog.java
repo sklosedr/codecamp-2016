@@ -1,5 +1,8 @@
 package com.nextlevel.codecamp.model.dog;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Dog {
 	
 	private Long id;

@@ -37,26 +37,26 @@ import com.nextlevel.codecamp.model.user.UserRole;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.User;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @RestController
-public class RegisterController { 
+public class RegisterController {
 	
 	@GetMapping("/registration")
-	    public String registration(Model model) {
+	    public String registrationGet(Model model) {
 			model.addAttribute("register", new Register());
 			return "registration";
 	    }
 	
 	@PostMapping("/registration")
-		public String submitRegistration(@ModelAttribute Register register){
+		public String submitRegistration(@RequestBody Register register){
+			System.out.println(register.getName());
 			Dog dog = new Dog();
 			convertToDog(dog, register);
 			DogUser user = new DogUser();
