@@ -8,7 +8,7 @@ import org.springframework.web.client.RestClientException;
 
 @SpringBootApplication
 public class Main {
-	
+
 	public static void main(String[] args) throws RestClientException, URISyntaxException {
 		SpringApplication.run(Main.class, args);
 	}
