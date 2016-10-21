@@ -12,6 +12,8 @@ import { UsersComponent } from './users/users.component';
 
 import { RouterModule } from '@angular/router';
 
+import { DogsService } from './dogs/dogs.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { RouterModule } from '@angular/router';
         { path: 'users', component: UsersComponent }
     ])
   ],
-  providers: [],
+  providers: [DogsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
