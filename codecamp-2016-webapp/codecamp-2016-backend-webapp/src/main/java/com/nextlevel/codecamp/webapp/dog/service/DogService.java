@@ -1,35 +1,33 @@
 package com.nextlevel.codecamp.webapp.dog.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.nextlevel.codecamp.model.dog.Dog;
+import com.nextlevel.codecamp.webapp.dog.client.DogClient;
 
 @Service
 public class DogService {
-	
-	private static String DOG_SERVICE_URL = "http://localhost:8084/dogs";
-	
+
 	@Autowired
-	private RestTemplate restTemplate;
-	
+	private DogClient dogClient;
+
 	public List<Dog> getDogs() {
-		Dog dog = new Dog();
-		dog.setDescription("good dog");
-		dog.setName("Wuffi");
-		dog.setFavoriteToy("ball");
-		dog.setGoodDog(true);
-		List<Dog> dogs = new ArrayList<Dog>();
-		dogs.add(dog);
-		return dogs;
+		return dogClient.listDogs();
+	}
+
+	public Dog addDog(Dog dog) {
+		return dogClient.addDog(dog);
 	}
 	
-	public Dog createDog(Dog dog) {
-		return restTemplate.postForObject(DOG_SERVICE_URL, dog, Dog.class);
+	public Dog updateDog(Dog dog) {
+		return dogClient.updateDog(dog);
+	}
+
+	public void deleteDog(int id) {
+		dogClient.deleteDog(id);
 	}
 
 }
