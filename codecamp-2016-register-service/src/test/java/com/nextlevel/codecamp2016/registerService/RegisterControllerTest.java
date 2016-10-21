@@ -29,9 +29,12 @@ public class RegisterControllerTest {
 	@Autowired
 	private TestRestTemplate restTemplate;
 
+	@Autowired
+	private RegisterService registerService;
+
 	@Before
 	public void mockDogsAndUsers() {
-		RestTemplate restTemplate = RegisterController.restTemplate;
+		RestTemplate restTemplate = registerService.getRestTemplate();
 		MockRestServiceServer server = MockRestServiceServer.bindTo(restTemplate).build();
 		mockDogs(server);
 		mockUsers(server);
