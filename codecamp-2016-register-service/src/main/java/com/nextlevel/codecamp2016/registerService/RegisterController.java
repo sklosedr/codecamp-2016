@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -82,6 +81,13 @@ public class RegisterController {
 		user.setPassword(reg.getPassword());
 		user.setUserRole(reg.getUserRole());
 		user.setId(reg.getId());
+	}
+
+	// only testing
+	@GetMapping("/test")
+	public String test(Model model) {
+		new TestSubmitRegistration().test();
+		return "test executed";
 	}
 
 	// only testing
