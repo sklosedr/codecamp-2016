@@ -42,6 +42,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -55,7 +56,7 @@ public class RegisterController {
 	    }
 	
 	@PostMapping("/registration")
-		public String submitRegistration(@ModelAttribute Register register){
+		public String submitRegistration(@RequestBody Register register){
 			Dog dog = new Dog();
 			convertToDog(dog, register);
 			DogUser user = new DogUser();

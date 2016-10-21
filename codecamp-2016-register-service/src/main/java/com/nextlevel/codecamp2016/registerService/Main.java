@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,8 +20,16 @@ public class Main {
 		SpringApplication.run(Main.class, args);
 		
         RestTemplate restTemplate = new RestTemplate();
+        
         Register register = mockRegister();
+        
+        //restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
+        restTemplate.getMessageConverters().add(new StringHttpMessageConverter()); 
+        
         String response = restTemplate.postForObject(new URI("http://localhost:8080/registration"), register, String.class);
+      
+
+        
         System.out.println(response);
 	}
 	
