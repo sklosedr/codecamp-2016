@@ -1,0 +1,12 @@
+spring:
+  application:
+     name: register-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+
+# HTTP Server
+server:
+  port: 8082   # HTTP (Tomcat) port
