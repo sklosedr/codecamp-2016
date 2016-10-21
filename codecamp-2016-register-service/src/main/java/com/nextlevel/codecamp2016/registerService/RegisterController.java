@@ -60,7 +60,6 @@ public class RegisterController {
 			convertToDog(dog, register);
 			DogUser user = new DogUser();
 			convertToUser(user, register);
-			
 			return "success";
 		}
 		
