@@ -1,15 +1,21 @@
-<p>
-  register works!
-
-<md-card class="demo-card demo-basic">
-  <md-toolbar color="primary">Registration</md-toolbar>
-  <md-card-content>
-    <form>
- 	 <md-input #usernameInput placeholder="Username"></md-input>
-
-  	<md-input #passwordInput placeholder="Password"></md-input>
-
-  	</form>
-  </md-card-content>
-</md-card>
-</p>
+<div class="form">
+	<md-card class="demo-card demo-basic">
+	  <md-toolbar color="primary">Register your lonely dog here:</md-toolbar>
+	  <md-card-content>
+	    <form>
+	 		<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input>
+			<md-input [(ngModel)]="registerModel.password" placeholder="Password"></md-input>
+			<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input>
+			<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input>
+			<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
+	   	 	<md-radio-group>
+				<md-radio-button value="Good dog">A good dog</md-radio-button>
+				<md-radio-button value="Bad dog">A beast</md-radio-button>
+            </md-radio-group>
+            <md-card-actions align="end">
+				<button md-raised-button type="submit" color="accent">Register!</button>
+		    </md-card-actions>
+	  	</form>
+	  </md-card-content>
+	</md-card>
+</div>
