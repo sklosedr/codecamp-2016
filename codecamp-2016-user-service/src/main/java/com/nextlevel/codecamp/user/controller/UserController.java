@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	    }
 	    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	    public DogUser post(@RequestBody DogUser dogUser){
+	    	
 	    	allUsers.add(dogUser);
 	    	return dogUser;
 	    }
