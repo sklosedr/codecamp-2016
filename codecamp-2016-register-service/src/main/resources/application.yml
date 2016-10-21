@@ -1,3 +1,4 @@
+# Spring properties
 spring:
   application:
      name: register-service
