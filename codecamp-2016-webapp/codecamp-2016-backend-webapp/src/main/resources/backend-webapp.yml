@@ -3,6 +3,11 @@ spring:
   application:
      name: backend-webapp
 
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
+
 # HTTP Server
 server:
   port: 8080   # HTTP (Tomcat) port
