@@ -57,6 +57,7 @@ public class RegisterController {
 	
 	@PostMapping("/registration")
 		public String submitRegistration(@RequestBody Register register){
+			System.out.println(register.getName());
 			Dog dog = new Dog();
 			convertToDog(dog, register);
 			DogUser user = new DogUser();

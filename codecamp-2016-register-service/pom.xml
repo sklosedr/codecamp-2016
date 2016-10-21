@@ -19,12 +19,7 @@
             <groupId>com.next-level-integration</groupId>
 	    	<artifactId>codecamp-2016-model</artifactId>
         </dependency>
-        
-	        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        
+
     </dependencies>
 
     <properties>

@@ -23,13 +23,8 @@ public class Main {
         
         Register register = mockRegister();
         
-        //restTemplate.getMessageConverters().add(new MappingJacksonHttpMessageConverter());
-        restTemplate.getMessageConverters().add(new StringHttpMessageConverter()); 
-        
         String response = restTemplate.postForObject(new URI("http://localhost:8080/registration"), register, String.class);
       
-
-        
         System.out.println(response);
 	}
 	
