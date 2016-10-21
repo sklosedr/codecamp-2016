@@ -1,10 +1,17 @@
 package com.nextlevel.codecamp.model.dog;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
 public class Dog {
 	
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String name;
 	private String favoriteToy;

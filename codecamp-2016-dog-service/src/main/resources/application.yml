@@ -3,12 +3,11 @@ spring:
   application:
      name: dog-service
 
-# Discovery Server Access
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8082/eureka/
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka/
 
 # HTTP Server
 server:
-  port: 8081   # HTTP (Tomcat) port
+  port: 8084   # HTTP (Tomcat) port

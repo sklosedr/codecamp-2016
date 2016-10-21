@@ -84,6 +84,13 @@ public class RegisterController {
 	}
 
 	// only testing
+	@GetMapping("/test")
+	public String test(Model model) {
+		new TestSubmitRegistration().test();
+		return "test executed";
+	}
+
+	// only testing
 	@RequestMapping(value = "/getRegistrations", method = RequestMethod.GET)
 	public List<Register> getRegistrations() {
 		List<Register> list = new ArrayList<>();
