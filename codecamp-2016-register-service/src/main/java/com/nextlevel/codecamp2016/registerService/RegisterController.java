@@ -1,12 +1,9 @@
 package com.nextlevel.codecamp2016.registerService;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import com.nextlevel.codecamp.model.dog.Dog;
 import com.nextlevel.codecamp.model.register.Register;
@@ -25,10 +20,10 @@ import com.nextlevel.codecamp.model.user.UserRole;
 @RestController
 public class RegisterController {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
+	@Autowired
+	private RegisterService registerService;
 
-	public static RestTemplate restTemplate = new RestTemplate();
-
+	// only testing
 	@GetMapping("/registration")
 	public String registrationGet(Model model) {
 		model.addAttribute("register", new Register());
@@ -37,49 +32,11 @@ public class RegisterController {
 
 	@PostMapping("/registration")
 	public String submitRegistration(@RequestBody Register register) {
-		Dog dog = new Dog();
-		convertToDog(dog, register);
-		String addDog = addDog(dog);
-		DogUser user = new DogUser();
-		convertToUser(user, register);
-		String addUser = addUser(user);
+		Dog dog = registerService.convertToDog(register);
+		String addDog = registerService.addDog(dog);
+		DogUser user = registerService.convertToUser(register);
+		String addUser = registerService.addUser(user);
 		return addDog + " <br> " + addUser;
-	}
-
-	private String addDog(Dog dog) {
-		try {
-			Dog response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, Dog.class);
-			return "Saved Dog with Id=" + response.getId();
-		} catch (RestClientException | URISyntaxException e) {
-			LOGGER.error(e.getMessage(), e);
-			return e.getMessage();
-		}
-	}
-
-	private String addUser(DogUser user) {
-		try {
-			DogUser response = restTemplate.postForObject(new URI("http://localhost:8083/addUser"), user,
-					DogUser.class);
-			return "Saved User with Id=" + response.getId();
-		} catch (RestClientException | URISyntaxException e) {
-			LOGGER.error(e.getMessage(), e);
-			return e.getMessage();
-		}
-	}
-
-	private void convertToDog(Dog dog, Register reg) {
-		dog.setDescription(reg.getDescription());
-		dog.setFavoriteToy(reg.getFavoriteToy());
-		dog.setGoodDog(reg.isGoodDog());
-		dog.setId(reg.getId());
-		dog.setName(reg.getName());
-	}
-
-	private void convertToUser(DogUser user, Register reg) {
-		user.setUsername(reg.getUsername());
-		user.setPassword(reg.getPassword());
-		user.setUserRole(reg.getUserRole());
-		user.setId(reg.getId());
 	}
 
 	// only testing

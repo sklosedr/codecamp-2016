@@ -1,3 +1,58 @@
-<h1>ID</h1>
-<p>{{dog.id}}</p>
+<md-sidenav #sidenav>
+	<md-nav-list>
+		<a md-list-item>
+			<span md-line>My Account</span>
+			<span md-line class="secondary">Edit my account information</span>
+		</a>
+		<a md-list-item>
+			<span md-line>Potential dates</span>
+			<span md-line class="secondary">Find your soulmate!</span>
+		</a>
+	</md-nav-list>
+</md-sidenav>
+<md-toolbar color="primary">
+	<button md-icon-button (click)="sidenav.open()">
+		<md-icon>menu</md-icon>
+	</button>
+	Puppy Love
+	<button md-fab (click)="formShowing=!formShowing">
+		<md-icon>add</md-icon>
+	</button>
+</md-toolbar>
 
+<div class="form" *ngIf="formShowing">
+<md-card>
+		<form (submit)="createDog($event)">
+	<md-card-title>Create your dog's profile, because {{title}}</md-card-title>
+	<md-card-content>
+			<md-input [(ngModel)]="createDogModel.name" name="name" placeholder="Name"></md-input>
+			<md-input [(ngModel)]="createDogModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input>
+			<md-input [(ngModel)]="createDogModel.description" name="description" placeholder="Description"></md-input>
+			<md-radio-group>
+				<md-radio-button value="Looking for love">Looking for love</md-radio-button>
+				<md-radio-button value="Just browsing">Just browsing</md-radio-button>
+          </md-radio-group>
+          <div>
+			<md-checkbox [(ngModel)]="createDogModel.goodDog" name="goodDog" indeterminate="true">Is a good dog</md-checkbox>
+          </div>
+	</md-card-content>
+	<md-card-actions align="end">
+		<button md-raised-button type="submit" color="accent">POST</button>
+	</md-card-actions>
+		</form>	
+</md-card>
+</div>
+
+<div class="card-container">
+	<md-card *ngFor="let dog of dogs">
+		<img md-card-image [alt]="dog.name" src='../assets/dogs/Hund_{{ (dog.id%5) }}.jpg'>
+		<md-card-title>{{ dog.name }}</md-card-title>
+		<md-card-content class="secondary">
+			{{ dog.description }}
+		</md-card-content>
+		<md-card-actions align="end">
+			<button md-button color="primary">SNIFF</button>
+			<button md-button color="primary">WOOF</button>
+		</md-card-actions>
+	</md-card>
+</div>
