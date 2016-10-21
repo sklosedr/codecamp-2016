@@ -39,32 +39,31 @@ public class RegisterController {
 	public String submitRegistration(@RequestBody Register register) {
 		Dog dog = new Dog();
 		convertToDog(dog, register);
-		boolean addDog = addDog(dog);
+		String addDog = addDog(dog);
 		DogUser user = new DogUser();
 		convertToUser(user, register);
-		boolean addUser = addUser(user);
-		return addDog && addUser ? "success" : "failure";
+		String addUser = addUser(user);
+		return addDog + " <br> " + addUser;
 	}
 
-	private boolean addDog(Dog dog) {
+	private String addDog(Dog dog) {
 		try {
-			String response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, String.class);
-			LOGGER.debug(response);
-			return true;
+			Dog response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, Dog.class);
+			return "Saved Dog with Id=" + response.getId();
 		} catch (RestClientException | URISyntaxException e) {
 			LOGGER.error(e.getMessage(), e);
-			return false;
+			return e.getMessage();
 		}
 	}
 
-	private boolean addUser(DogUser user) {
+	private String addUser(DogUser user) {
 		try {
-			String response = restTemplate.postForObject(new URI("http://localhost:8083/users"), user, String.class);
-			LOGGER.debug(response);
-			return true;
+			DogUser response = restTemplate.postForObject(new URI("http://localhost:8083/addUser"), user,
+					DogUser.class);
+			return "Saved User with Id=" + response.getId();
 		} catch (RestClientException | URISyntaxException e) {
 			LOGGER.error(e.getMessage(), e);
-			return false;
+			return e.getMessage();
 		}
 	}
 
