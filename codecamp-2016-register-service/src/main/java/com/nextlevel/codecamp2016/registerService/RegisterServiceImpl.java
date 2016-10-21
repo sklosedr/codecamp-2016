@@ -21,11 +21,6 @@ public class RegisterServiceImpl implements RegisterService {
 	private RestTemplate restTemplate = new RestTemplate();
 
 	@Override
-	public RestTemplate getRestTemplate() {
-		return restTemplate;
-	}
-
-	@Override
 	public Dog convertToDog(Register reg) {
 		Dog dog = new Dog();
 		dog.setDescription(reg.getDescription());
