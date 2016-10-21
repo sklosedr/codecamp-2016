@@ -27,7 +27,7 @@ public class RegisterController {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	private RestTemplate restTemplate = new RestTemplate();
+	public static RestTemplate restTemplate = new RestTemplate();
 
 	@GetMapping("/registration")
 	public String registrationGet(Model model) {
