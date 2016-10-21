@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,15 +20,20 @@ public class Main {
 		
         RestTemplate restTemplate = new RestTemplate();
         
-        Register register = mockRegister();
-        
-        String response = restTemplate.postForObject(new URI("http://localhost:8080/registration"), register, String.class);
+        Dog dog = mockDog();
+        String response = restTemplate.postForObject(new URI("http://localhost:8080/add-dog"), dog, String.class);
       
         System.out.println(response);
 	}
 	
 	private static Dog mockDog() {
-		return null; // TODO
+		Dog dog = new Dog();
+		dog.setId(42L);
+		dog.setName("Luna");
+		dog.setFavoriteToy("Beissknaeul");
+		dog.setDescription("Gewinnt jeden Bellkampf.");
+		dog.setGoodDog(true);
+		return dog;
 	}
 
 	private static Register mockRegister() {
