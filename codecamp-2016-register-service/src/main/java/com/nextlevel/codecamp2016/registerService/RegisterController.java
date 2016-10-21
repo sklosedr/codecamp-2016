@@ -56,29 +56,27 @@ public class RegisterController {
 	
 	@PostMapping("/registration")
 		public String submitRegistration(@ModelAttribute Register register){
-			Dog dog = convertToDog(register);
-			DogUser user = convertToUser(register);
+			Dog dog = new Dog();
+			convertToDog(dog, register);
+			DogUser user = new DogUser();
+			convertToUser(user, register);
 			
 			return "success";
 		}
 		
-		private Dog convertToDog(Register reg){
-			Dog dog = new Dog();
+		private void convertToDog(Dog dog, Register reg){
 			dog.setDescription(reg.getDescription());
 			dog.setFavoriteToy(reg.getFavoriteToy());
 			dog.setGoodDog(reg.isGoodDog());
 			dog.setId(reg.getId());
 			dog.setName(reg.getName());
-			return dog;
 		}
 		
-		private DogUser convertToUser(Register reg){
-			DogUser user = new DogUser();
+		private void convertToUser(DogUser user, Register reg){
 			user.setUsername(reg.getUsername());
 			user.setPassword(reg.getPassword());
 			user.setUserRole(reg.getUserRole());
 			user.setId(reg.getId());
-			return user;
 		}
 	
 	@RequestMapping(value = "/getRegistrations", method=RequestMethod.GET)
