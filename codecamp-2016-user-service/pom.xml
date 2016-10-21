@@ -19,6 +19,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.next-level-integration</groupId>
+            <artifactId>codecamp-2016-model</artifactId>
+        </dependency>
     </dependencies>
     
     
