@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 		@Autowired
 		private UserRepository userRepository;
 		
-		private List<DogUser> allUsers = new ArrayList<DogUser>();
 	    @RequestMapping("/")
 	    public String index() {
 	        return "Greetings from Spring Boot!";
@@ -36,8 +35,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	    
 	    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	    @Transactional
-	    public DogUser post(@RequestBody DogUser dogUser){
-	    	allUsers.add(dogUser);
+	    public DogUser addUser(@RequestBody DogUser dogUser){
+	    	Long id = dogUser.getId();
+	    	
+	    	if(id != null && userRepository.exists(id)){
+	    		throw new IllegalArgumentException("Cannot create user. User with id " + id + " already exists");
+	    	}
+	    	
 	    	userRepository.save(dogUser);
 	    	return dogUser;
 	    }
