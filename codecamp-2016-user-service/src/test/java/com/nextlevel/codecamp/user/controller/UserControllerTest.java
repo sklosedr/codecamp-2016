@@ -1,3 +1,5 @@
+package com.nextlevel.codecamp.user.controller;
+
 import static org.junit.Assert.*;
 
 import static org.hamcrest.Matchers.equalTo;
@@ -28,7 +30,6 @@ public class UserControllerTest {
 
 	@Test
 	public void getHello() throws Exception {
-//		mvc.perform(MockMvcRequestBuilders.get("/").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 		mvc.perform(MockMvcRequestBuilders.get("/")).andExpect(status().isOk())
 				.andExpect(content().string(equalTo("Greetings from Spring Boot!")));
 	}
