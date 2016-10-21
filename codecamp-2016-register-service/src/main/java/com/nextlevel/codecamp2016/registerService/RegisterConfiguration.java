@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableDiscoveryClient
-public class MainConfiguration {
+public class RegisterConfiguration {
 
 }

@@ -25,7 +25,7 @@ import com.nextlevel.codecamp.model.user.UserRole;
 @RestController
 public class RegisterController {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(RegisterController.class);
 
 	public static RestTemplate restTemplate = new RestTemplate();
 
@@ -49,10 +49,10 @@ public class RegisterController {
 	private boolean addDog(Dog dog) {
 		try {
 			String response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, String.class);
-			logger.debug(response);
+			LOGGER.debug(response);
 			return true;
 		} catch (RestClientException | URISyntaxException e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return false;
 		}
 	}
@@ -60,10 +60,10 @@ public class RegisterController {
 	private boolean addUser(DogUser user) {
 		try {
 			String response = restTemplate.postForObject(new URI("http://localhost:8083/users"), user, String.class);
-			logger.debug(response);
+			LOGGER.debug(response);
 			return true;
 		} catch (RestClientException | URISyntaxException e) {
-			logger.error(e.getMessage(), e);
+			LOGGER.error(e.getMessage(), e);
 			return false;
 		}
 	}

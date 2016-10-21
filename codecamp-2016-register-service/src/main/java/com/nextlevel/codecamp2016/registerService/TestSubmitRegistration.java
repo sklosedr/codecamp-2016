@@ -12,7 +12,7 @@ import com.nextlevel.codecamp.model.register.Register;
 
 public class TestSubmitRegistration {
 
-	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(TestSubmitRegistration.class);
 
 	public void test() {
 		RestTemplate restTemplate = new RestTemplate();
@@ -20,7 +20,7 @@ public class TestSubmitRegistration {
 		try {
 			String response = restTemplate.postForObject(new URI("http://localhost:8082/registration"), register,
 					String.class);
-			logger.info(response);
+			LOGGER.info(response);
 		} catch (RestClientException | URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
