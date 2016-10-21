@@ -12,9 +12,9 @@ export class RegisterComponent implements OnInit {
   public registerModel : Register;
   errorMessage: string;
   mode = 'Observable';
-
+  
   constructor(private registerService: RegisterService) { }
-
+  
   register($event) {
       let registration: Register;
       this.registerService.register(this.registerModel)
@@ -24,11 +24,7 @@ export class RegisterComponent implements OnInit {
       
   }
 
-  
-
   ngOnInit() {
   	this.registerModel = new Register(0, 'muster', 'strongpass', 'USER', 'Hans', 'ball', 'nice doggy dog', true);
   }
-
-
 }
