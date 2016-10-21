@@ -1,7 +1,9 @@
 package com.nextlevel.codecamp.model.register;
 
 import com.nextlevel.codecamp.model.user.UserRole;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Register {
 	
 	private Long id;

@@ -43,7 +43,8 @@ public class RegisterController {
 	 
 	@RequestMapping(value = "/registration", method=RequestMethod.POST)
 	    public String registration(Register register) {
-	        return "Greetings from Spring Boot!";
+		System.out.println(register.getName());
+	        return "registration";
 	    }
 	
 	@RequestMapping(value = "/getRegistrations", method=RequestMethod.GET)
