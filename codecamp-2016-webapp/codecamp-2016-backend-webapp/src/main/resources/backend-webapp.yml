@@ -1,0 +1,8 @@
+# Spring Properties
+spring:
+  application:
+     name: backend-webapp
+
+# HTTP Server
+server:
+  port: 8080   # HTTP (Tomcat) port

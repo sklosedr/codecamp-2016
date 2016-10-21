@@ -19,6 +19,7 @@
             <groupId>com.next-level-integration</groupId>
 	    	<artifactId>codecamp-2016-model</artifactId>
         </dependency>
+
     </dependencies>
 
     <properties>
