@@ -5,6 +5,8 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +25,9 @@ import com.nextlevel.codecamp.model.user.UserRole;
 @RestController
 public class RegisterController {
 
-	RestTemplate restTemplate = new RestTemplate();
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	private RestTemplate restTemplate = new RestTemplate();
 
 	@GetMapping("/registration")
 	public String registrationGet(Model model) {
@@ -44,23 +48,22 @@ public class RegisterController {
 
 	private boolean addDog(Dog dog) {
 		try {
-			String response = restTemplate.postForObject(new URI("http://localhost:8084/add-dog"), dog, String.class);
-			System.out.println(response);
+			String response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, String.class);
+			logger.debug(response);
 			return true;
 		} catch (RestClientException | URISyntaxException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage(), e);
 			return false;
 		}
 	}
 
 	private boolean addUser(DogUser user) {
 		try {
-			String response = restTemplate.postForObject(new URI("http://localhost:8083/add-doguser"), user,
-					String.class);
-			System.out.println(response);
+			String response = restTemplate.postForObject(new URI("http://localhost:8083/users"), user, String.class);
+			logger.debug(response);
 			return true;
 		} catch (RestClientException | URISyntaxException e) {
-			System.out.println(e.getMessage());
+			logger.error(e.getMessage(), e);
 			return false;
 		}
 	}
@@ -80,6 +83,7 @@ public class RegisterController {
 		user.setId(reg.getId());
 	}
 
+	// only testing
 	@RequestMapping(value = "/getRegistrations", method = RequestMethod.GET)
 	public List<Register> getRegistrations() {
 		List<Register> list = new ArrayList<>();
@@ -88,9 +92,7 @@ public class RegisterController {
 		reg.setUsername("some_dog");
 		reg.setPassword("test");
 		reg.setUserRole(UserRole.USER);
-
 		list.add(reg);
-
 		return list;
 	}
 }
