@@ -57,10 +57,12 @@
 		<md-card-content class="secondary">
 			<md-input placeholder="Lieblingsspielzeug" [(ngModel)]="dogs[i].favoriteToy"></md-input>
 			<md-input placeholder="Beschreibung" [(ngModel)]="dogs[i].description" #descriptionCount>
-			 <md-hint align="end">{{descriptionCount.characterCount}} / 100</md-hint>
+			 	<md-hint align="end">{{descriptionCount.characterCount}} / 100</md-hint>
 			</md-input>
 		</md-card-content>
+		<md-checkbox [checked]="dogs[i].goodDog">Guter Hund?</md-checkbox>
 		<md-card-actions align="end">
+		
 			<button md-button color="primary" (click)="saveDog(dogs[i])">Speichern</button>
 			<button md-button color="primary" (click)="deleteDog(dogs[i].id)">L&ouml;schen</button>
 		</md-card-actions>
