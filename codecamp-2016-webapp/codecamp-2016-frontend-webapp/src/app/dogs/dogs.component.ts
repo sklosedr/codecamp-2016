@@ -29,7 +29,8 @@ export class DogsComponent implements OnInit {
       this.dogsService.createDog(this.createDogModel)
         .subscribe(
             dog => this.dogs.push(dog),
-            error => this.errorMessage = <any>error);
+            error => this.errorMessage = <any>error,
+            () => this.addPicIds());
       this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true,0);
       this.formShowing = false;
   }
@@ -45,7 +46,7 @@ export class DogsComponent implements OnInit {
      saveDog(dog: Dog) {
       this.dogsService.saveDog(dog)
         .subscribe(
-           () => this.getDogs());
+        );
       }
     
     searchDog() {
