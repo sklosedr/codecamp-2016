@@ -6,7 +6,6 @@ import java.net.URISyntaxException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.nextlevel.codecamp.model.dog.Dog;
@@ -46,7 +45,7 @@ public class RegisterServiceImpl implements RegisterService {
 		try {
 			Dog response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, Dog.class);
 			return "Saved Dog with Id=" + response.getId();
-		} catch (RestClientException | URISyntaxException e) {
+		} catch (URISyntaxException | RuntimeException e) {
 			LOGGER.error(e.getMessage(), e);
 			return e.getMessage();
 		}
@@ -58,7 +57,7 @@ public class RegisterServiceImpl implements RegisterService {
 			DogUser response = restTemplate.postForObject(new URI("http://localhost:8083/addUser"), user,
 					DogUser.class);
 			return "Saved User with Id=" + response.getId();
-		} catch (RestClientException | URISyntaxException e) {
+		} catch (URISyntaxException | RuntimeException e) {
 			LOGGER.error(e.getMessage(), e);
 			return e.getMessage();
 		}

@@ -13,6 +13,7 @@ import { UsersComponent } from './users/users.component';
 import { RouterModule } from '@angular/router';
 
 import { DogsService } from './dogs/dogs.service';
+import { RegisterService } from './register/register.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { DogsService } from './dogs/dogs.service';
         { path: 'users', component: UsersComponent }
     ])
   ],
-  providers: [DogsService],
+  providers: [DogsService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
