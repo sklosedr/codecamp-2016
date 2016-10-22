@@ -37,6 +37,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 	    	return IterableUtils.toList(userRepository.findAll());
 	    }
 	    
+	    @RequestMapping("/user/")
+	    public List<DogUser> getUser(Long id) {
+	    	return IterableUtils.toList(userRepository.findAll());
+	    }
+	    
 	    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	    @Transactional
 	    public DogUser addUser(@RequestBody DogUser dogUser){
