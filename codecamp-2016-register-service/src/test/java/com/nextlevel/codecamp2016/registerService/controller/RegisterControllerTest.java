@@ -13,8 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.nextlevel.codecamp.model.register.Register;
 
 @RunWith(SpringRunner.class)
