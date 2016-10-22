@@ -24,6 +24,9 @@ export class RegisterComponent implements OnInit {
                                               error => this.errorMessage = <any>error);
   }
 
+  redirectToLogin($event){
+    this.router.navigate(['/login']);
+  }
   
   ngOnInit() {
     this.registerModel = new Register();
