@@ -6,6 +6,7 @@ public class DogClientMock implements DogClient {
 
 	@Override
 	public Dog addDog(Dog dog) {
+		dog.setId(0L);
 		return dog;
 	}
 

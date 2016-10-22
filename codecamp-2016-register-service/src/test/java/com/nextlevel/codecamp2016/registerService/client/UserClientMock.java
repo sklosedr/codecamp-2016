@@ -6,6 +6,7 @@ public class UserClientMock implements UserClient {
 
 	@Override
 	public DogUser addUser(DogUser user) {
+		user.setId(0L);
 		return user;
 	}
 

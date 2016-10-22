@@ -3,7 +3,6 @@ package com.nextlevel.codecamp2016.registerService.service;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,6 @@ public class RegisterServiceTest {
 	@Autowired
 	private RegisterService registerService;
 
-	@Ignore
 	@Test
 	public void testAddDog() {
 		Dog dog = new Dog();
