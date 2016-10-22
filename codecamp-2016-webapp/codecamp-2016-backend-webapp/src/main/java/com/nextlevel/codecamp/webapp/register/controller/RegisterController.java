@@ -2,6 +2,7 @@ package com.nextlevel.codecamp.webapp.register.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,11 +32,7 @@ public class RegisterController {
 	}
 
 	private String convertExceptionMessageToJson(Exception e) {
-		String message = "";
-		if (e != null && e.getMessage() != null) {
-			message = e.getMessage();
-		}
-		return "{\"error\":\"" + message.replaceAll("\"", "'") + "\"}";
+		return new JSONObject().put("error", e.getMessage()).toString();
 	}
 
 }
