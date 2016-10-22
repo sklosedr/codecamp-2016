@@ -1,5 +1,7 @@
 package com.nextlevel.codecamp.service.dog.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +10,5 @@ import com.nextlevel.codecamp.model.dog.Dog;
 @Repository
 public interface DogRepository extends JpaRepository<Dog, Long>{
 
-	public Dog findByName(String name);
+	public List<Dog> findByName(String name);
 }
