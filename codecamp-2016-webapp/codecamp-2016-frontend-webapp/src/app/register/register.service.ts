@@ -10,7 +10,7 @@ export class RegisterService {
         
   private url = 'http://localhost:8080/register';
     
-  private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin ': 'http://localhost:8082'});
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
     

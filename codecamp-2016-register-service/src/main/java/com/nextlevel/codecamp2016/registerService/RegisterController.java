@@ -24,13 +24,13 @@ public class RegisterController {
 	private RegisterService registerService;
 
 	// only testing
-	@GetMapping("/registration")
+	@GetMapping("/register")
 	public String registrationGet(Model model) {
 		model.addAttribute("register", new Register());
 		return "registration";
 	}
 
-	@PostMapping("/registration")
+	@PostMapping("/register")
 	public String submitRegistration(@RequestBody Register register) {
 		Dog dog = registerService.convertToDog(register);
 		String addDog = registerService.addDog(dog);
