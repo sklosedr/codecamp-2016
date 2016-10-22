@@ -40,7 +40,7 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public String addDog(Dog dog) {
+	public String addDog(Dog dog) throws IllegalArgumentException {
 		Dog response = dogClient.addDog(dog);
 		if (response == null || response.getId() == null) {
 			throw new IllegalArgumentException("Failed to add dog " + dog.getName());
@@ -49,7 +49,7 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public String addUser(DogUser user) {
+	public String addUser(DogUser user) throws IllegalArgumentException {
 		DogUser response = userClient.addUser(user);
 		if (response == null || response.getId() == null) {
 			throw new IllegalArgumentException("Failed to add DogUser " + user.getUsername());
