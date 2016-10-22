@@ -42,6 +42,12 @@ export class DogsComponent implements OnInit {
       
   }
     
+     saveDog(dog: Dog) {
+      this.dogsService.saveDog(dog)
+        .subscribe(
+           () => this.getDogs());
+      }
+    
     searchDog() {
       this.dogsService.searchDogs(this.searchDogModel)
         .subscribe(
@@ -58,7 +64,11 @@ export class DogsComponent implements OnInit {
                        () => this.addPicIds());
   }
     
-    Rand(min: number, max: number): number {
+    customTrackBy(index: number, obj: any): any {
+    return index;
+  }
+  
+      Rand(min: number, max: number): number {
         return (Math.random() * (max - min + 1) | 0) + min;
     } 
     
