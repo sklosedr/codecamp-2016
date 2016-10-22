@@ -9,5 +9,5 @@ public interface DogService {
 	Dog create (Dog dog);
 	Dog update (Dog dog);
 	boolean delete (Long id);
-	Dog findByName (String name);
+	List<Dog> findByName (String name);
 }

@@ -50,7 +50,7 @@ public class DogServiceImpl implements DogService{
 	}
 
 	@Override
-	public Dog findByName(String name) {
+	public List<Dog> findByName(String name) {
 		return dogRepository.findByName(name);
 	}
 }
