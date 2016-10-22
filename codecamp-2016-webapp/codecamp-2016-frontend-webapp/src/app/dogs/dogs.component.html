@@ -50,7 +50,7 @@
 
 <div class="card-container">
 	<md-card *ngFor="let dog of dogs">
-		<img md-card-image [alt]="dog.name" src='../assets/dogs/Hund_{{ (dog.id%5) }}.jpg'>
+		<img md-card-image [alt]="dog.name" src='../assets/dogs/Hund_{{dog.picId}}.jpg'>
 		<md-card-title>{{ dog.name }}</md-card-title>
 		<md-card-content class="secondary">
 			{{ dog.description }}

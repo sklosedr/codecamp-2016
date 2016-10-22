@@ -26,13 +26,16 @@ public class RegisterController {
 		try {
 			return registerService.register(register);
 		} catch (RuntimeException e) {
-			String message = e.getMessage();
-			if (message == null) {
-				message = "";
-			}
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-					.body("{\"error\":\"" + message.replaceAll("\"", "'") + "\"}");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(convertExceptionMessageToJson(e));
 		}
+	}
+
+	private String convertExceptionMessageToJson(Exception e) {
+		String message = "";
+		if (e != null && e.getMessage() != null) {
+			message = e.getMessage();
+		}
+		return "{\"error\":\"" + message.replaceAll("\"", "'") + "\"}";
 	}
 
 }
