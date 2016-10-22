@@ -49,15 +49,22 @@
 </div>
 
 <div class="card-container">
-	<md-card *ngFor="let dog of dogs">
-		<img md-card-image [alt]="dog.name" src='../assets/dogs/Hund_{{ (dog.id%5) }}.jpg'>
-		<md-card-title>{{ dog.name }}</md-card-title>
+<!-- <li *ng-for="#dog of dogs"><input type="text" [(ng-model)]="n.name">{{n.name}}</li> -->
+	<md-card *ngFor="let dog of dogs; let i=index; trackBy:customTrackBy">
+		<img md-card-image [alt]="dogs[i].name" src='../assets/dogs/Hund_{{ (dogs[i].picId) }}.jpg'>
+		
+		<md-input placeholder="Name" [(ngModel)]="dogs[i].name"></md-input>
 		<md-card-content class="secondary">
-			{{ dog.description }}
+			<md-input placeholder="Lieblingsspielzeug" [(ngModel)]="dogs[i].favoriteToy"></md-input>
+			<md-input placeholder="Beschreibung" [(ngModel)]="dogs[i].description" #descriptionCount>
+			 	<md-hint align="end">{{descriptionCount.characterCount}} / 100</md-hint>
+			</md-input>
 		</md-card-content>
+		<md-checkbox [checked]="dogs[i].goodDog">Guter Hund?</md-checkbox>
 		<md-card-actions align="end">
-			<button md-button color="primary">SNIFF</button>
-			<button md-button color="primary" (click)="deleteDog(dog.id)">WOOF</button>
+		
+			<button md-raised-button color="primary" (click)="saveDog(dogs[i])">Speichern</button>
+			<button md-raised-button color="primary" (click)="deleteDog(dogs[i].id)">L&ouml;schen</button>
 		</md-card-actions>
 	</md-card>
 </div>

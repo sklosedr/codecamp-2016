@@ -5,10 +5,14 @@
 	    <form (submit)="login($event)">
 	 		<md-input [(ngModel)]="loginModel.username" name="username" placeholder="Username"></md-input>
 			<md-input [(ngModel)]="loginModel.password" name="password" placeholder="Password"></md-input>
-            <md-card-actions align="end">
-				<button md-raised-button type="submit" color="accent">Log in</button>
+				<p>
+					<button md-raised-button id="loginbutton" type="submit" color="accent" >Log in</button>
+				</p>
+            <md-card-actions>
 		    </md-card-actions>
 	  	</form>
+	  	<a id="goToRegisterLink" (click)="goToRegister()">To create a new user click here!</a>
+
 	  </md-card-content>
 	</md-card>
 </div>

@@ -18,7 +18,7 @@ import com.nextlevel.codecamp.model.register.Register;
 @RunWith(SpringRunner.class)
 @ContextConfiguration
 public class RegisterControllerTest {
-	
+
 	@Autowired
 	RegisterController registerController;
 
@@ -26,10 +26,10 @@ public class RegisterControllerTest {
 	public void testRegistrationCall() throws RestClientException, URISyntaxException {
 		Register register = new Register();
 		ResponseEntity<String> response = registerController.submitRegistration(register);
-		Object actual = new JSONObject(response.getBody()).get("response");
-		assertEquals("Saved Dog with Id=0 <br> Saved DogUser with Id=0", actual);
+		Object actualDog = new JSONObject(response.getBody()).get("dog");
+		assertEquals("Saved Dog with Id=0", actualDog);
+		Object actualUser = new JSONObject(response.getBody()).get("user");
+		assertEquals("Saved DogUser with Id=0", actualUser);
 	}
-
-
 
 }

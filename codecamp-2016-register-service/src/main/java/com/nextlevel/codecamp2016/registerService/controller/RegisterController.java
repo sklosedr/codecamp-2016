@@ -3,6 +3,7 @@ package com.nextlevel.codecamp2016.registerService.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,16 +64,7 @@ public class RegisterController {
 	}
 
 	private String buildResponseJson(String addDog, String addUser) {
-		addDog = prepareJsonString(addDog);
-		addUser = prepareJsonString(addUser);
-		return "{\"response\":\"" + addDog + " <br> " + addUser + "\"}";
-	}
-
-	private String prepareJsonString(String input) {
-		if (input == null) {
-			input = "";
-		}
-		return input.replaceAll("\"", "'");
+		return new JSONObject().put("dog", addDog).put("user", addUser).toString();
 	}
 
 	// only testing

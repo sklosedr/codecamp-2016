@@ -53,13 +53,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public JsonUserNameAuthenticationFilter jsonUserNameAuthenticationFilter() throws Exception {
     	JsonUserNameAuthenticationFilter jsonFilter = new JsonUserNameAuthenticationFilter();
     	jsonFilter.setAuthenticationManager(authenticationManager());
+    	jsonFilter.setAuthenticationSuccessHandler(ajaxAuthenticationSuccessHandler);
+    	jsonFilter.setAuthenticationFailureHandler(ajaxAuthenticationFailureHandler);
         return jsonFilter;
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-        	//.antMatchers("/**") // TODO remove this to activate security
+        	.antMatchers("/**") // TODO remove this to activate security
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/*.{html,css,ico}")
             .antMatchers("/app/**/*.{html,js,css}")
@@ -77,8 +79,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .and()
             .formLogin()
             .loginProcessingUrl("/login")
-            .successHandler(ajaxAuthenticationSuccessHandler)
-            .failureHandler(ajaxAuthenticationFailureHandler)
+            //.successHandler(ajaxAuthenticationSuccessHandler)
+            //.failureHandler(ajaxAuthenticationFailureHandler)
+            .defaultSuccessUrl("http://localhost:4200/dogs")
             .usernameParameter("username")
             .passwordParameter("password")
             .permitAll()
@@ -100,4 +103,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .and()
         	.csrf().disable();
     }
+    
+    
 }

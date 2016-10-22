@@ -13,8 +13,8 @@ export class DogsComponent implements OnInit {
   dogs: Dog[];
   mode = 'Observable';
   formShowing : boolean;
-  createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
-  searchDogModel = new Dog(0, '', '', '', true);
+  createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true, 0);
+  searchDogModel = new Dog(0, '', '', '', true, 0);
     
   constructor(private dogsService: DogsService) {
       this.formShowing = false;  
@@ -29,23 +29,29 @@ export class DogsComponent implements OnInit {
       this.dogsService.createDog(this.createDogModel)
         .subscribe(
             dog => this.dogs.push(dog),
-            error => this.errorMessage = <any>error);
-      this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
+            error => this.errorMessage = <any>error,
+            () => this.addPicIds());
+      this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true,0);
       this.formShowing = false;
   }
     
     deleteDog(id: number) {
       this.dogsService.deleteDog(id)
         .subscribe(
-            
            () => this.getDogs());
       
   }
     
+     saveDog(dog: Dog) {
+      this.dogsService.saveDog(dog)
+        .subscribe( 
+        );
+      }
+    
     searchDog() {
       this.dogsService.searchDogs(this.searchDogModel)
         .subscribe(
-            dogs => this.dogs = dogs,
+            dogs => this.initDogs(dogs),
             error => this.errorMessage = <any>error);
       this.formShowing = false;
     }
@@ -53,8 +59,27 @@ export class DogsComponent implements OnInit {
   getDogs() {
     this.dogsService.getDogs()
                      .subscribe(
-                       dogs => this.dogs = dogs,
+                       dogs => this.initDogs(dogs),
                        error =>  this.errorMessage = <any>error);
   }
+    
+    customTrackBy(index: number, obj: any): any {
+    return index;
+  }
+  
+      Rand(min: number, max: number): number {
+        return (Math.random() * (max - min + 1) | 0) + min;
+    } 
+    
+    addPicIds(){
+        for (let dog of this.dogs) {
+            dog.picId = this.Rand(0,10); 
+            }
+    }
+    
+    initDogs(dogs :Dog[]) {
+        this.dogs = dogs;
+        this.addPicIds();
+    }
 
 }
