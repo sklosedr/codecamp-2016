@@ -46,20 +46,27 @@ public class RegisterController {
 		DogUser user = registerService.convertToUser(register);
 		String addDog;
 		String addUser;
-		HttpStatus status=HttpStatus.CREATED;
+		HttpStatus status = HttpStatus.CREATED;
 		try {
 			addDog = registerService.addDog(dog);
 		} catch (IllegalArgumentException e) {
-			status=HttpStatus.CONFLICT;
-			addDog=e.getMessage();
+			status = HttpStatus.CONFLICT;
+			addDog = e.getMessage();
 		}
 		try {
 			addUser = registerService.addUser(user);
 		} catch (IllegalArgumentException e) {
-			status=HttpStatus.CONFLICT;
-			addUser=e.getMessage();
+			status = HttpStatus.CONFLICT;
+			addUser = e.getMessage();
 		}
-		return ResponseEntity.status(status).body(addDog + " <br> " + addUser);
+		if (addDog == null) {
+			addDog = "";
+		}
+		if (addUser == null) {
+			addUser = "";
+		}
+		return ResponseEntity.status(status).body(
+				"{\"response\":\"" + addDog.replaceAll("\"", "'") + " <br> " + addUser.replaceAll("\"", "'") + "\"}");
 	}
 
 	// only testing
