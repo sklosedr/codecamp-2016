@@ -13,6 +13,8 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,12 +52,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 	    
 	    @RequestMapping(value = "/authenticateUser", method = RequestMethod.POST)
 	    @Transactional
-	    public DogUser authenticate(@RequestAttribute("username") String username , @RequestAttribute("password") String password){
+	    public ResponseEntity<DogUser> authenticate(@RequestParam(value = "username") String username , @RequestParam(value = "password") String password){
 	    	DogUser dogUser = userRepository.findByUsernameAndPassword(username, password);
 	    	if(dogUser == null){
-	    		throw new IllegalArgumentException("User " + username + " or Password " + password + " incorrect ");
+	    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 	    	}
-	    	return dogUser;
+	    	return ResponseEntity.status(HttpStatus.OK).body(dogUser);
 	    }
 	    
 	    
