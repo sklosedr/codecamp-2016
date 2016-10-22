@@ -32,10 +32,10 @@ public class RegisterControllerTest {
 
 	@Before
 	public void mockDogsAndUsers() {
-		RestTemplate restTemplate = null; // TODO
-		MockRestServiceServer server = MockRestServiceServer.bindTo(restTemplate).build();
-		mockDogs(server);
-		mockUsers(server);
+//		RestTemplate restTemplate = new RestTemplate();
+//		MockRestServiceServer server = MockRestServiceServer.bindTo(restTemplate).build();
+//		mockDogs(server);
+//		mockUsers(server);
 	}
 
 	private void mockDogs(MockRestServiceServer server) {
@@ -48,7 +48,6 @@ public class RegisterControllerTest {
 				.andRespond(withSuccess("{ }", MediaType.APPLICATION_JSON));
 	}
 
-	@Ignore
 	@Test
 	public void testRegistrationCall() throws RestClientException, URISyntaxException {
 		Register register = new Register();

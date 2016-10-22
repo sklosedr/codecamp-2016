@@ -3,16 +3,17 @@
 	  <md-toolbar color="primary">Register your lonely dog here:</md-toolbar>
 	  <md-card-content>
 	    <form (submit)="register($event)">
-	 		<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input>
-			<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input>
-			<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input>
-			<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input>
-			<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
-	   	 	<md-radio-group>
-				<md-radio-button name="goodDog" value="Good dog">A good dog</md-radio-button>
-				<md-radio-button name="goodDog" value="Bad dog">A beast</md-radio-button>
-            </md-radio-group>
-            <md-card-actions align="end">
+	 		<p>Username: <md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input></p>
+			<p>Password: <md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input></p>
+			<p>Dog Name: <md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input></p>
+			<p>Favorite toy: <md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input></p>
+			<p>Description: <md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input></p>
+	   	 	<p>Character: 
+	   	 	<md-radio-group ng-model="data.group1">
+				<md-radio-button name="goodDog" value="Good dog"  class="md-primary>A good dog</md-radio-button>
+				<md-radio-button name="badDog" value="Bad dog">A beast</md-radio-button>
+            </md-radio-group></p>
+            <md-card-actions>
 				<button md-raised-button type="submit" color="accent">Register!</button>
 		    </md-card-actions>
 	  	</form>
