@@ -1,30 +1,35 @@
-<md-grid-list cols="3" >
-	<md-grid-tile>
-		<img md-card-image src='../assets/dogs/Sad_dog.jpg'>
-    </md-grid-tile>
-    <md-grid-tile>
+
+	<md-grid-list cols="3" >
+		<md-grid-tile>
+		<div class="card-container">
 			<md-card class="demo-card demo-basic">
-				<md-card-header>
-				 	<md-toolbar color="primary">Register your lonely dog here:</md-toolbar>
-				</md-card-header>
-			  	<br>
-				<md-card-content>
-				  <form (submit)="register($event)">
-					<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input><br/>
-				<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input><br/>
-				<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input><br/>
-				<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input><br/>
-				<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
-				 	 	<p>Character: </p>
-				 	 	<md-radio-group name="goodDogRG" [(ngModel)]="registerModel.goodDog">
-					<md-radio-button value="true"  checked="true">A good dog</md-radio-button>
-					<md-radio-button value="false">A beast</md-radio-button>
-				         </md-radio-group>
-				         <md-card-actions>
-					<button md-raised-button type="submit" color="accent">Register!</button>
-				   </md-card-actions>
-					</form>
-				</md-card-content>
+				<img md-card-image src='../assets/dogs/Sad_dog.jpg'>
 			</md-card>
-	</md-grid-tile>
-</md-grid-list>
+			</div>
+	    </md-grid-tile>
+	    <md-grid-tile>
+				<md-card class="demo-card demo-basic">
+					<md-card-header>
+					 	<md-toolbar color="primary">Register your lonely dog here:</md-toolbar>
+					</md-card-header>
+				  	<br>
+					<md-card-content>
+					  <form (submit)="register($event)">
+						<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input><br/>
+					<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input><br/>
+					<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input><br/>
+					<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input><br/>
+					<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
+					 	 	<p>Character: </p>
+					 	 	<md-radio-group name="goodDogRG" [(ngModel)]="registerModel.goodDog">
+						<md-radio-button value="true"  checked="true">A good dog</md-radio-button>
+						<md-radio-button value="false">A beast</md-radio-button>
+					         </md-radio-group>
+					         <md-card-actions>
+						<button md-raised-button type="submit" color="accent">Register!</button>
+					   </md-card-actions>
+						</form>
+					</md-card-content>
+				</md-card>
+		</md-grid-tile>
+	</md-grid-list>
