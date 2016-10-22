@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   register($event) {
       let registration: Register;
       this.registerService.register(this.registerModel).subscribe(
-                                              success => this.router.navigate(['/dogs']),
+                                              success => this.router.navigate(['/login']),
                                               error => this.errorMessage = <any>error);
   }
 
