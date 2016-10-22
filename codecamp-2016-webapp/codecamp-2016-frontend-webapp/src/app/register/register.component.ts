@@ -23,10 +23,7 @@ export class RegisterComponent implements OnInit {
                                               success => this.router.navigate(['/dogs']),
                                               error => this.errorMessage = <any>error);
   }
-  
-  success(){
-    
-  }
+
   
   ngOnInit() {
     this.registerModel = new Register();

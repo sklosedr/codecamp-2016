@@ -2,6 +2,7 @@ package com.nextlevel.codecamp.webapp.register.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.nextlevel.codecamp.model.register.Register;
@@ -15,7 +16,8 @@ public class RegisterService {
 
 	public String register(Register register) {
 		try {
-			registerClient.register(register);
+			ResponseEntity<String> response = registerClient.register(register);
+			System.out.println(response.toString());
 			// TODO check return value
 			return HttpStatus.CREATED.toString();
 		} catch (RuntimeException e) {

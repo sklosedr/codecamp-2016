@@ -6,10 +6,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.nextlevel.codecamp.model.user.DogUser;
+import com.nextlevel.codecamp.user.data.UserCredentials;
 
 @Configuration
 @EnableDiscoveryClient
-@EntityScan(basePackageClasses=DogUser.class)
+@EntityScan(basePackageClasses={DogUser.class,UserCredentials.class})
 @EnableJpaRepositories
 public class UserConfiguration {
 
