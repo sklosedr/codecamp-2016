@@ -19,6 +19,9 @@ public class AjaxAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, authentication);
+        //response.setStatus(HttpServletResponse.SC_OK);
+        // This is actually not an error, but an OK message. It is sent to avoid redirects.
+        //response.sendError(HttpServletResponse.SC_OK);
+		SecurityUtils.sendResponse(response, HttpServletResponse.SC_OK, authentication.getPrincipal());
 	}
 }

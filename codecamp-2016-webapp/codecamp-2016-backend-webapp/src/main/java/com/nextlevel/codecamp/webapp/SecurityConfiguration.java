@@ -53,6 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public JsonUserNameAuthenticationFilter jsonUserNameAuthenticationFilter() throws Exception {
     	JsonUserNameAuthenticationFilter jsonFilter = new JsonUserNameAuthenticationFilter();
     	jsonFilter.setAuthenticationManager(authenticationManager());
+    	jsonFilter.setAuthenticationSuccessHandler(ajaxAuthenticationSuccessHandler);
+    	jsonFilter.setAuthenticationFailureHandler(ajaxAuthenticationFailureHandler);
         return jsonFilter;
     }
 
@@ -77,8 +79,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	    .and()
             .formLogin()
             .loginProcessingUrl("/login")
-            .successHandler(ajaxAuthenticationSuccessHandler)
-            .failureHandler(ajaxAuthenticationFailureHandler)
+            //.successHandler(ajaxAuthenticationSuccessHandler)
+            //.failureHandler(ajaxAuthenticationFailureHandler)
             .defaultSuccessUrl("http://localhost:4200/dogs")
             .usernameParameter("username")
             .passwordParameter("password")
