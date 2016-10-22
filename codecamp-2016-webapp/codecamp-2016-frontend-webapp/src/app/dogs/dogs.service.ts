@@ -41,6 +41,13 @@ export class DogsService {
         .catch(this.handleError); 
   }
     
+    saveDog(dog: Dog): Observable<Dog> {
+        return this.http
+        .put(this.url, JSON.stringify(dog), {headers: this.headers})
+        .map(this.extractData)
+        .catch(this.handleError); 
+  }
+    
   private extractData(res: Response) {
     let body = res.json();
     return body || { };
