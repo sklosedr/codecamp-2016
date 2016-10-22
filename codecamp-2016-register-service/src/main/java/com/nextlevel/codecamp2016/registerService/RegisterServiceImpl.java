@@ -1,12 +1,7 @@
 package com.nextlevel.codecamp2016.registerService;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import com.nextlevel.codecamp.model.dog.Dog;
 import com.nextlevel.codecamp.model.register.Register;
@@ -15,9 +10,11 @@ import com.nextlevel.codecamp.model.user.DogUser;
 @Service
 public class RegisterServiceImpl implements RegisterService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(RegisterServiceImpl.class);
+	@Autowired
+	private DogClient dogClient;
 
-	private RestTemplate restTemplate = new RestTemplate();
+	@Autowired
+	private UserClient userClient;
 
 	@Override
 	public Dog convertToDog(Register reg) {
@@ -42,25 +39,20 @@ public class RegisterServiceImpl implements RegisterService {
 
 	@Override
 	public String addDog(Dog dog) {
-		try {
-			Dog response = restTemplate.postForObject(new URI("http://localhost:8084/dogs"), dog, Dog.class);
-			return "Saved Dog with Id=" + response.getId();
-		} catch (URISyntaxException | RuntimeException e) {
-			LOGGER.error(e.getMessage(), e);
-			return e.getMessage();
+		Dog response = dogClient.addDog(dog);
+		if (response == null || response.getId() == null) {
+			return "Failed to add dog " + dog.getName();
 		}
+		return "Saved Dog with Id=" + response.getId();
 	}
 
 	@Override
 	public String addUser(DogUser user) {
-		try {
-			DogUser response = restTemplate.postForObject(new URI("http://localhost:8083/addUser"), user,
-					DogUser.class);
-			return "Saved User with Id=" + response.getId();
-		} catch (URISyntaxException | RuntimeException e) {
-			LOGGER.error(e.getMessage(), e);
-			return e.getMessage();
+		DogUser response = userClient.addUser(user);
+		if (response == null || response.getId() == null) {
+			return "Failed to add dog " + user.getUsername();
 		}
+		return "Saved Dog with Id=" + response.getId();
 	}
 
 }
