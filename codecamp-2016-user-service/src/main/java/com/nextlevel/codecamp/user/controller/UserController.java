@@ -13,9 +13,11 @@ import javax.transaction.Transactional;
 
 import org.apache.commons.collections4.IterableUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 	@RestController
 	public class UserController {
@@ -45,4 +47,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	    	userRepository.save(dogUser);
 	    	return dogUser;
 	    }
+	    
+	    @RequestMapping(value = "/authenticateUser", method = RequestMethod.POST)
+	    @Transactional
+	    public DogUser authenticate(@RequestAttribute("username") String username , @RequestAttribute("password") String password){
+	    	DogUser dogUser = userRepository.findByUsernameAndPassword(username, password);
+	    	if(dogUser == null){
+	    		throw new IllegalArgumentException("User " + username + " or Password " + password + " incorrect ");
+	    	}
+	    	return dogUser;
+	    }
+	    
+	    
 	}

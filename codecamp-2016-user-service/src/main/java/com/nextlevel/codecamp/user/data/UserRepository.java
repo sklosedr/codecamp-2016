@@ -5,5 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 import com.nextlevel.codecamp.model.user.DogUser;
 
 public interface UserRepository extends CrudRepository<DogUser, Long> {
-
+	public DogUser findByUsernameAndPassword (String userName, String password);
 }
