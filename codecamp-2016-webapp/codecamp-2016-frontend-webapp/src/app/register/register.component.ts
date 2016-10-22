@@ -19,8 +19,8 @@ export class RegisterComponent implements OnInit {
       let registration: Register;
       this.registerService.register(this.registerModel)
         .subscribe(
-            registerModel => this.register,
-            error => this.errorMessage = <any>error);
+            (result) => {document.location.href="/dogs"},
+            (error) => {this.errorMessage = <any>error});
       
   }
 
