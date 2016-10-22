@@ -3,10 +3,10 @@
 	  <md-toolbar color="primary">Register your lonely dog here:</md-toolbar>
 	  <md-card-content>
 	    <form (submit)="register($event)">
-	 		<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input>
-			<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input>
-			<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input>
-			<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input>
+	 		<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input><br/>
+			<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input><br/>
+			<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input><br/>
+			<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input><br/>
 			<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
 	   	 	<p>Character: 
 	   	 	<md-radio-group ng-model="data.group1">
