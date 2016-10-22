@@ -29,5 +29,13 @@ public class DogService {
 	public void deleteDog(int id) {
 		dogClient.deleteDog(id);
 	}
+	
+	public List<Dog> searchDogs(Dog dog) {
+		return dogClient.findByName(dog.getName());
+	}
+
+	public List<Dog> findByName(String name) {
+		return dogClient.findByName(name);
+	}
 
 }
