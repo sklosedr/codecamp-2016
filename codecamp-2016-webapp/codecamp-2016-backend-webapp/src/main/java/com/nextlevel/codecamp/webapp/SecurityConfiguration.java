@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-        	//.antMatchers("/**") // TODO remove this to activate security
+        	.antMatchers("/**") // TODO remove this to activate security
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/*.{html,css,ico}")
             .antMatchers("/app/**/*.{html,js,css}")
@@ -79,6 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .loginProcessingUrl("/login")
             .successHandler(ajaxAuthenticationSuccessHandler)
             .failureHandler(ajaxAuthenticationFailureHandler)
+            .defaultSuccessUrl("http://localhost:4200/dogs")
             .usernameParameter("username")
             .passwordParameter("password")
             .permitAll()
