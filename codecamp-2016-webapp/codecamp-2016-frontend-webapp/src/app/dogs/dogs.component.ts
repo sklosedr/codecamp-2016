@@ -42,6 +42,12 @@ export class DogsComponent implements OnInit {
       
   }
     
+     saveDog(dog: Dog) {
+      this.dogsService.saveDog(dog)
+        .subscribe(
+           () => this.getDogs());
+      }
+    
     searchDog() {
       this.dogsService.searchDogs(this.searchDogModel)
         .subscribe(
@@ -55,6 +61,10 @@ export class DogsComponent implements OnInit {
                      .subscribe(
                        dogs => this.dogs = dogs,
                        error =>  this.errorMessage = <any>error);
+  }
+    
+    customTrackBy(index: number, obj: any): any {
+    return index;
   }
 
 }
