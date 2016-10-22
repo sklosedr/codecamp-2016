@@ -38,7 +38,6 @@ export class DogsComponent implements OnInit {
     deleteDog(id: number) {
       this.dogsService.deleteDog(id)
         .subscribe(
-            
            () => this.getDogs());
       
   }
@@ -52,7 +51,7 @@ export class DogsComponent implements OnInit {
     searchDog() {
       this.dogsService.searchDogs(this.searchDogModel)
         .subscribe(
-            dogs => this.dogs = dogs,
+            dogs => this.initDogs(dogs),
             error => this.errorMessage = <any>error);
       this.formShowing = false;
     }
@@ -60,9 +59,8 @@ export class DogsComponent implements OnInit {
   getDogs() {
     this.dogsService.getDogs()
                      .subscribe(
-                       dogs => this.dogs = dogs,
-                       error =>  this.errorMessage = <any>error,
-                       () => this.addPicIds());
+                       dogs => this.initDogs(dogs),
+                       error =>  this.errorMessage = <any>error);
   }
     
     customTrackBy(index: number, obj: any): any {
@@ -77,6 +75,11 @@ export class DogsComponent implements OnInit {
         for (let dog of this.dogs) {
             dog.picId = this.Rand(0,10); 
             }
+    }
+    
+    initDogs(dogs :Dog[]) {
+        this.dogs = dogs;
+        this.addPicIds();
     }
 
 }
