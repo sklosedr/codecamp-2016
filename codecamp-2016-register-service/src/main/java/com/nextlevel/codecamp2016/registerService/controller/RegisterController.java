@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +35,25 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public String submitRegistration(@RequestBody Register register) {
+	public ResponseEntity<String> submitRegistration(@RequestBody Register register) {
 		Dog dog = registerService.convertToDog(register);
-		String addDog = registerService.addDog(dog);
 		DogUser user = registerService.convertToUser(register);
-		String addUser = registerService.addUser(user);
-		return addDog + " <br> " + addUser;
+		String addDog;
+		String addUser;
+		HttpStatus status=HttpStatus.CREATED;
+		try {
+			addDog = registerService.addDog(dog);
+		} catch (IllegalArgumentException e) {
+			status=HttpStatus.CONFLICT;
+			addDog=e.getMessage();
+		}
+		try {
+			addUser = registerService.addUser(user);
+		} catch (IllegalArgumentException e) {
+			status=HttpStatus.CONFLICT;
+			addUser=e.getMessage();
+		}
+		return ResponseEntity.status(status).body(addDog + " <br> " + addUser);
 	}
 
 	// only testing
