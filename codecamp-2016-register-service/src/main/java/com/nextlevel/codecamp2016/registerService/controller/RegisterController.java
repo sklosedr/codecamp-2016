@@ -1,4 +1,4 @@
-package com.nextlevel.codecamp2016.registerService;
+package com.nextlevel.codecamp2016.registerService.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,8 @@ import com.nextlevel.codecamp.model.dog.Dog;
 import com.nextlevel.codecamp.model.register.Register;
 import com.nextlevel.codecamp.model.user.DogUser;
 import com.nextlevel.codecamp.model.user.UserRole;
+import com.nextlevel.codecamp2016.registerService.TestSubmitRegistration;
+import com.nextlevel.codecamp2016.registerService.service.RegisterService;
 
 @RestController
 public class RegisterController {

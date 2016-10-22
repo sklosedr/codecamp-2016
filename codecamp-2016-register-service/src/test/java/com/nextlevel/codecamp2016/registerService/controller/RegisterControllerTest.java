@@ -1,4 +1,4 @@
-package com.nextlevel.codecamp2016.registerService;
+package com.nextlevel.codecamp2016.registerService.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
