@@ -45,4 +45,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 	    	userRepository.save(dogUser);
 	    	return dogUser;
 	    }
+	    
+	    @RequestMapping(value = "/authenticateUser", method = RequestMethod.POST)
+	    @Transactional
+	    public DogUser authenticate(String userName , String userPassword){
+	    	DogUser dogUser = userRepository.findByUsername(userName);
+	    	if(dogUser.getPassword()!=userPassword){
+	    		
+	    	}
+	    	return dogUser;
+	    }
+	    
+	    
 	}
