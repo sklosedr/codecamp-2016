@@ -59,14 +59,20 @@ public class RegisterController {
 			status = HttpStatus.CONFLICT;
 			addUser = e.getMessage();
 		}
-		if (addDog == null) {
-			addDog = "";
+		return ResponseEntity.status(status).body(buildResponseJson(addDog, addUser));
+	}
+
+	private String buildResponseJson(String addDog, String addUser) {
+		addDog = prepareJsonString(addDog);
+		addUser = prepareJsonString(addUser);
+		return "{\"response\":\"" + addDog + " <br> " + addUser + "\"}";
+	}
+
+	private String prepareJsonString(String input) {
+		if (input == null) {
+			input = "";
 		}
-		if (addUser == null) {
-			addUser = "";
-		}
-		return ResponseEntity.status(status).body(
-				"{\"response\":\"" + addDog.replaceAll("\"", "'") + " <br> " + addUser.replaceAll("\"", "'") + "\"}");
+		return input.replaceAll("\"", "'");
 	}
 
 	// only testing
