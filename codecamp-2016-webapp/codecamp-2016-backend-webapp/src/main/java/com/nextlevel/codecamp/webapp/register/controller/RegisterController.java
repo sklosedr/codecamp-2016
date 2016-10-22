@@ -26,7 +26,12 @@ public class RegisterController {
 		try {
 			return registerService.register(register);
 		} catch (RuntimeException e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+			String message = e.getMessage();
+			if (message == null) {
+				message = "";
+			}
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body("{\"error\":\"" + message.replaceAll("\"", "'") + "\"}");
 		}
 	}
 

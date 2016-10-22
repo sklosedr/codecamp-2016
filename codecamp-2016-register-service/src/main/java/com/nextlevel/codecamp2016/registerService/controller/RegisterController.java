@@ -59,7 +59,14 @@ public class RegisterController {
 			status = HttpStatus.CONFLICT;
 			addUser = e.getMessage();
 		}
-		return ResponseEntity.status(status).body(addDog + " <br> " + addUser);
+		if (addDog == null) {
+			addDog = "";
+		}
+		if (addUser == null) {
+			addUser = "";
+		}
+		return ResponseEntity.status(status).body(
+				"{\"response\":\"" + addDog.replaceAll("\"", "'") + " <br> " + addUser.replaceAll("\"", "'") + "\"}");
 	}
 
 	// only testing
