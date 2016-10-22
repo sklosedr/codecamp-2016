@@ -9,6 +9,7 @@ import { Dog } from './dogs';
 export class DogsService {
         
   private url = 'http://localhost:8080/dogs';
+  private searchDogsUrl = 'http://localhost:8080/searchDogs';
     
   private headers = new Headers({'Content-Type': 'application/json'});
 
@@ -18,13 +19,26 @@ export class DogsService {
     return this.http
         .post(this.url, JSON.stringify(dog), {headers: this.headers})
         .map(this.extractData)
-        .catch(this.handleError);
+        .catch(this.handleError); 
   }
     
   getDogs(): Observable<Dog[]> {
       return this.http.get(this.url)
         .map(this.extractData)
         .catch(this.handleError);
+  }
+    
+    searchDogs(dog: Dog): Observable<Dog[]> {
+       return this.http
+        .post(this.searchDogsUrl, JSON.stringify(dog), {headers: this.headers})
+        .map(this.extractData)
+        .catch(this.handleError); 
+  }
+    
+    deleteDog(id: number) {
+        return this.http
+        .delete(this.url + '/' + id)
+        .catch(this.handleError); 
   }
     
   private extractData(res: Response) {

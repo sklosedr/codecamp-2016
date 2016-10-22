@@ -5,6 +5,8 @@
     http://www.springframework.org/schema/beans 
     http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
     
+    <bean id="registerController" class="com.nextlevel.codecamp2016.registerService.controller.RegisterController" />
+    
     <bean id="registerService" class="com.nextlevel.codecamp2016.registerService.service.RegisterServiceImpl" />
     
     <bean id="dogClient" class="com.nextlevel.codecamp2016.registerService.client.DogClientMock" />
