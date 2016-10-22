@@ -28,6 +28,12 @@ public class RegisterController {
 	private RegisterService registerService;
 
 	// only testing
+	@GetMapping("/")
+	public String index(Model model) {
+		return "Register-Service is running.";
+	}
+
+	// only testing
 	@GetMapping("/register")
 	public String registrationGet(Model model) {
 		model.addAttribute("register", new Register());
