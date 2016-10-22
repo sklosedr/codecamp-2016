@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+
+    <service id="registerService" class="com.nextlevel.codecamp2016.registerService.service.RegisterServiceImpl" />
+    
+    <feignClient id="dogClient" class="com.nextlevel.codecamp2016.registerService.client.DogClientMock" />
+    
+    <feignClient id="userClient" class="com.nextlevel.codecamp2016.registerService.client.UserClientMock" />
+
+</beans>
