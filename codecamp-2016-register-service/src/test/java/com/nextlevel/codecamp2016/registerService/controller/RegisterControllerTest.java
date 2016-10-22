@@ -7,6 +7,7 @@ import java.net.URISyntaxException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.client.RestClientException;
@@ -23,8 +24,8 @@ public class RegisterControllerTest {
 	@Test
 	public void testRegistrationCall() throws RestClientException, URISyntaxException {
 		Register register = new Register();
-		String response = registerController.submitRegistration(register);
-		assertEquals("Saved Dog with Id=0 <br> Saved DogUser with Id=0", response);
+		ResponseEntity<String> response = registerController.submitRegistration(register);
+		assertEquals("Saved Dog with Id=0 <br> Saved DogUser with Id=0", response.getBody());
 	}
 
 

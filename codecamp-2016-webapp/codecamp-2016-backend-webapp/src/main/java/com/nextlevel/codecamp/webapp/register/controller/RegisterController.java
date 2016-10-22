@@ -18,7 +18,7 @@ public class RegisterController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(path = "/register", method = RequestMethod.POST, produces = "application/json")
-	public Register register(@RequestBody Register register) {
+	public String register(@RequestBody Register register) {
 		return registerService.register(register);
 	}
 

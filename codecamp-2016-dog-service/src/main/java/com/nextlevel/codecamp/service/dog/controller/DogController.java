@@ -29,6 +29,11 @@ public class DogController {
 		return dogService.list();
 	}
 	
+	@GetMapping("/{name}")
+	public List<Dog> findByName(@PathVariable String name) {
+		return dogService.findByName(name);
+	}
+	
 	@PostMapping
 	public Dog createDog(@RequestBody Dog dog) {
 		return dogService.create(dog);
