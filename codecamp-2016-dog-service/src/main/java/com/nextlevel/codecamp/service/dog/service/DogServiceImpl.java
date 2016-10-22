@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.nextlevel.codecamp.model.dog.Dog;
@@ -20,8 +21,12 @@ public class DogServiceImpl implements DogService{
 
 	@Override
 	public List<Dog> list() {
-		return dogRepository.findAll();
+		return dogRepository.findAll(sortByIdDesc());
 	}
+	
+	private Sort sortByIdDesc() {
+        return new Sort(Sort.Direction.DESC, "id");
+    }
 
 	@Override
 	public Dog create(Dog dog) {
