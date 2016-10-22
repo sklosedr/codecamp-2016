@@ -43,7 +43,7 @@ public class RegisterServiceImpl implements RegisterService {
 	public String addDog(Dog dog) {
 		Dog response = dogClient.addDog(dog);
 		if (response == null || response.getId() == null) {
-			return "Failed to add dog " + dog.getName();
+			throw new IllegalArgumentException("Failed to add dog " + dog.getName());
 		}
 		return "Saved Dog with Id=" + response.getId();
 	}
@@ -52,7 +52,7 @@ public class RegisterServiceImpl implements RegisterService {
 	public String addUser(DogUser user) {
 		DogUser response = userClient.addUser(user);
 		if (response == null || response.getId() == null) {
-			return "Failed to add DogUser " + user.getUsername();
+			throw new IllegalArgumentException("Failed to add DogUser " + user.getUsername());
 		}
 		return "Saved DogUser with Id=" + response.getId();
 	}

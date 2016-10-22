@@ -5,6 +5,7 @@ import java.util.List;
 import javax.websocket.server.PathParam;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,5 +23,9 @@ public interface DogClient {
 	Dog updateDog(Dog dog);
 	
 	@RequestMapping(method = RequestMethod.DELETE, value = "/dogs/{id}")
-	void deleteDog(@PathParam(value = "id") int id);
+	void deleteDog(@PathVariable(value = "id") int id);
+
+	@RequestMapping(method = RequestMethod.GET, value = "/dogs/{name}")
+	List<Dog> findByName(@PathVariable(value = "name") String name);
+	
 }

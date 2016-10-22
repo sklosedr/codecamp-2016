@@ -16,7 +16,7 @@
 					<md-card-content>
 					  <form (submit)="register($event)">
 						<md-input [(ngModel)]="registerModel.username" name="username" placeholder="Username"></md-input><br/>
-					<md-input [(ngModel)]="registerModel.password" name="password" placeholder="Password"></md-input><br/>
+					<md-input [(ngModel)]="registerModel.password" type="password" name="password" placeholder="Password"></md-input><br/>
 					<md-input [(ngModel)]="registerModel.name" name="name" placeholder="Name"></md-input><br/>
 					<md-input [(ngModel)]="registerModel.favoriteToy" name="favoriteToy" placeholder="Favorite toy"></md-input><br/>
 					<md-input [(ngModel)]="registerModel.description" name="description" placeholder="Description"></md-input>
