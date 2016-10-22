@@ -13,8 +13,8 @@ export class DogsComponent implements OnInit {
   dogs: Dog[];
   mode = 'Observable';
   formShowing : boolean;
-  createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
-  searchDogModel = new Dog(0, '', '', '', true);
+  createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true, 0);
+  searchDogModel = new Dog(0, '', '', '', true, 0);
     
   constructor(private dogsService: DogsService) {
       this.formShowing = false;  
@@ -30,7 +30,7 @@ export class DogsComponent implements OnInit {
         .subscribe(
             dog => this.dogs.push(dog),
             error => this.errorMessage = <any>error);
-      this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
+      this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true,0);
       this.formShowing = false;
   }
     
@@ -54,7 +54,18 @@ export class DogsComponent implements OnInit {
     this.dogsService.getDogs()
                      .subscribe(
                        dogs => this.dogs = dogs,
-                       error =>  this.errorMessage = <any>error);
+                       error =>  this.errorMessage = <any>error,
+                       () => this.addPicIds());
   }
+    
+    Rand(min: number, max: number): number {
+        return (Math.random() * (max - min + 1) | 0) + min;
+    } 
+    
+    addPicIds(){
+        for (let dog of this.dogs) {
+            dog.picId = this.Rand(0,10); 
+            }
+    }
 
 }

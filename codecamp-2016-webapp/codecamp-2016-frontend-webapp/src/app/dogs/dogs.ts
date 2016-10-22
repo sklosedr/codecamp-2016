@@ -4,6 +4,7 @@ export class Dog {
         public name: string,
         public favoriteToy: string,
         public description: string,
-        public goodDog: boolean
+        public goodDog: boolean,
+        public picId : number
     ) { }
 }
