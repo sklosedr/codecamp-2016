@@ -1,6 +1,10 @@
 package com.nextlevel.codecamp.webapp.register.controller;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +22,20 @@ public class RegisterController {
 
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(path = "/register", method = RequestMethod.POST, produces = "application/json")
-	public String register(@RequestBody Register register) {
-		return registerService.register(register);
+	public ResponseEntity<String> register(@RequestBody Register register, HttpServletResponse response) {
+		try {
+			return registerService.register(register);
+		} catch (RuntimeException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(convertExceptionMessageToJson(e));
+		}
+	}
+
+	private String convertExceptionMessageToJson(Exception e) {
+		String message = "";
+		if (e != null && e.getMessage() != null) {
+			message = e.getMessage();
+		}
+		return "{\"error\":\"" + message.replaceAll("\"", "'") + "\"}";
 	}
 
 }

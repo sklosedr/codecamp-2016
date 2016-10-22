@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './register.service';
 import { Register } from './register.model';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,17 +15,19 @@ export class RegisterComponent implements OnInit {
   errorMessage: string;
   mode = 'Observable';
   
-  constructor(private registerService: RegisterService) { }
+  constructor(private registerService: RegisterService, private router: Router) { }
   
   register($event) {
       let registration: Register;
-      this.registerService.register(this.registerModel)
-        .subscribe(
-            registerModel => this.register,
-            error => this.errorMessage = <any>error);
-      
+      this.registerService.register(this.registerModel).subscribe(
+                                              success => this.router.navigate(['/dogs']),
+                                              error => this.errorMessage = <any>error);
   }
 
+  redirectToLogin($event){
+    this.router.navigate(['/login']);
+  }
+  
   ngOnInit() {
     this.registerModel = new Register();
     this.registerModel.userRole = "USER";
