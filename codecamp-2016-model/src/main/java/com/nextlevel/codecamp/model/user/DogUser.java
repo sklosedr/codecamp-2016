@@ -24,6 +24,14 @@ public class DogUser {
 	@Enumerated(EnumType.STRING)
 	private UserRole userRole;
 	
+	public DogUser() {
+	}
+	
+	public DogUser(String username, UserRole userRole) {
+		this.username = username;
+		this.userRole = userRole;
+	}
+
 	public Long getId() {
 		return id;
 	}
