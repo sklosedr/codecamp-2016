@@ -1,4 +1,4 @@
-package com.nextlevel.codecamp2016.registerService;
+package com.nextlevel.codecamp2016.registerService.client;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;

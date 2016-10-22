@@ -1,4 +1,4 @@
-package com.nextlevel.codecamp2016.registerService;
+package com.nextlevel.codecamp2016.registerService.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import com.nextlevel.codecamp.model.dog.Dog;
 import com.nextlevel.codecamp.model.register.Register;
 import com.nextlevel.codecamp.model.user.DogUser;
+import com.nextlevel.codecamp2016.registerService.IRestTemplateFactory;
+import com.nextlevel.codecamp2016.registerService.client.DogClient;
+import com.nextlevel.codecamp2016.registerService.client.UserClient;
 
 @Service
 public class RegisterServiceImpl implements RegisterService {
