@@ -1,58 +1,33 @@
 package com.nextlevel.codecamp2016.registerService.controller;
 
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
-import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 import java.net.URISyntaxException;
 
-import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.client.ExpectedCount;
-import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestTemplate;
 
 import com.nextlevel.codecamp.model.register.Register;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@ContextConfiguration
 public class RegisterControllerTest {
-
+	
 	@Autowired
-	private TestRestTemplate restTemplate;
-
-	@Before
-	public void mockDogsAndUsers() {
-//		RestTemplate restTemplate = new RestTemplate();
-//		MockRestServiceServer server = MockRestServiceServer.bindTo(restTemplate).build();
-//		mockDogs(server);
-//		mockUsers(server);
-	}
-
-	private void mockDogs(MockRestServiceServer server) {
-		server.expect(ExpectedCount.manyTimes(), requestTo("http://localhost:8084/dogs"))
-				.andRespond(withSuccess("{ }", MediaType.APPLICATION_JSON));
-	}
-
-	private void mockUsers(MockRestServiceServer server) {
-		server.expect(ExpectedCount.manyTimes(), requestTo("http://localhost:8083/addUser"))
-				.andRespond(withSuccess("{ }", MediaType.APPLICATION_JSON));
-	}
+	RegisterController registerController;
 
 	@Test
 	public void testRegistrationCall() throws RestClientException, URISyntaxException {
 		Register register = new Register();
-		String response = restTemplate.postForObject("/registration", register, String.class);
-		assertEquals("Saved Dog with Id=null <br> Saved User with Id=null", response);
+		ResponseEntity<String> response = registerController.submitRegistration(register);
+		assertEquals("Saved Dog with Id=0 <br> Saved DogUser with Id=0", response.getBody());
 	}
+
+
 
 }

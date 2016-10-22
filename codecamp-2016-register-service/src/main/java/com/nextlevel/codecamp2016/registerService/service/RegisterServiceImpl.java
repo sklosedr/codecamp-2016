@@ -40,21 +40,21 @@ public class RegisterServiceImpl implements RegisterService {
 	}
 
 	@Override
-	public String addDog(Dog dog) {
+	public String addDog(Dog dog) throws IllegalArgumentException {
 		Dog response = dogClient.addDog(dog);
 		if (response == null || response.getId() == null) {
-			return "Failed to add dog " + dog.getName();
+			throw new IllegalArgumentException("Failed to add dog " + dog.getName());
 		}
 		return "Saved Dog with Id=" + response.getId();
 	}
 
 	@Override
-	public String addUser(DogUser user) {
+	public String addUser(DogUser user) throws IllegalArgumentException {
 		DogUser response = userClient.addUser(user);
 		if (response == null || response.getId() == null) {
-			return "Failed to add dog " + user.getUsername();
+			throw new IllegalArgumentException("Failed to add DogUser " + user.getUsername());
 		}
-		return "Saved Dog with Id=" + response.getId();
+		return "Saved DogUser with Id=" + response.getId();
 	}
 
 }

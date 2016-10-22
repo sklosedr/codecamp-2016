@@ -14,9 +14,10 @@ export class DogsComponent implements OnInit {
   mode = 'Observable';
   formShowing : boolean;
   createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
+  searchDogModel = new Dog(0, '', '', '', true);
     
   constructor(private dogsService: DogsService) {
-      this.formShowing = false;
+      this.formShowing = false;  
   }
 
   ngOnInit() {
@@ -32,6 +33,22 @@ export class DogsComponent implements OnInit {
       this.createDogModel = new Dog(0, 'Goofy', 'Micky Mouse', 'Friend of Micky Mouse', true);
       this.formShowing = false;
   }
+    
+    deleteDog(id: number) {
+      this.dogsService.deleteDog(id)
+        .subscribe(
+            
+           () => this.getDogs());
+      
+  }
+    
+    searchDog() {
+      this.dogsService.searchDogs(this.searchDogModel)
+        .subscribe(
+            dogs => this.dogs = dogs,
+            error => this.errorMessage = <any>error);
+      this.formShowing = false;
+    }
     
   getDogs() {
     this.dogsService.getDogs()

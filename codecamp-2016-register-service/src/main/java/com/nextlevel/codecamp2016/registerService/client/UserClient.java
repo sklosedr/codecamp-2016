@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nextlevel.codecamp.model.user.DogUser;
 
-@FeignClient("dog-service")
+@FeignClient("user-service")
 public interface UserClient {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/addUser")

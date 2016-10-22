@@ -6,6 +6,7 @@ import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,7 +34,7 @@ public class DogController {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@RequestMapping(path="/dogs/{id}", method = RequestMethod.DELETE)
-	public void deleteDog(@PathParam(value = "id") int id) {
+	public void deleteDog(@PathVariable(value = "id") int id) {
 		dogService.deleteDog(id);
 	}
 	
@@ -42,4 +43,17 @@ public class DogController {
 	public List<Dog> getDogs() {
 		return dogService.getDogs();
 	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(path="/searchDogs", method = RequestMethod.POST, produces="application/json")
+	public List<Dog> searchDogs(@RequestBody Dog dog) {
+		return dogService.searchDogs(dog);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:4200")
+	@RequestMapping(path="/dogs/{name}", method = RequestMethod.GET, produces="application/json")
+	public List<Dog> findByName(@PathVariable(value = "name") String name) {
+		return dogService.findByName(name);
+	}
+	
 }

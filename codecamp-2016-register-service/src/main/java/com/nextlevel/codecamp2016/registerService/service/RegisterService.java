@@ -10,8 +10,8 @@ public interface RegisterService {
 
 	public DogUser convertToUser(Register reg);
 
-	public String addDog(Dog dog);
+	public String addDog(Dog dog) throws IllegalArgumentException;
 
-	public String addUser(DogUser user);
+	public String addUser(DogUser user) throws IllegalArgumentException;
 
 }

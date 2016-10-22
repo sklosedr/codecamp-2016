@@ -19,12 +19,14 @@ export class RegisterComponent implements OnInit {
       let registration: Register;
       this.registerService.register(this.registerModel)
         .subscribe(
-
+            registerModel => this.register,
             error => this.errorMessage = <any>error);
       
   }
 
   ngOnInit() {
-  	this.registerModel = new Register(0, 'muster', 'strongpass', 'USER', 'Hans', 'ball', 'nice doggy dog', true);
+    this.registerModel = new Register();
+    this.registerModel.userRole = "USER";
+  	//this.registerModel = new Register(0, 'muster', 'strongpass', 'USER', 'Hans', 'ball', 'nice doggy dog', true);
   }
 }
