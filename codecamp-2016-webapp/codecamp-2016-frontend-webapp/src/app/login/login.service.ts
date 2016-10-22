@@ -7,7 +7,7 @@ import { Login } from './login.model';
 export class LoginService {
   private url = 'http://localhost:8080/login';
     
-  private headers = new Headers({'Content-Type': 'application/json', 'Access-Control-Allow-Origin ': 'http://localhost:8082'});
+  private headers = new Headers({'Content-Type': 'application/json'});
 
   constructor(private http: Http) { }
     
