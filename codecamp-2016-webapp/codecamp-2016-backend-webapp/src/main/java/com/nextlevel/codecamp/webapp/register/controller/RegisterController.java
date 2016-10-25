@@ -22,7 +22,7 @@ public class RegisterController {
 	private RegisterService registerService;
 
 	@CrossOrigin(origins = "http://localhost:4200")
-	@RequestMapping(path = "/register", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(path = "/api/register", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<String> register(@RequestBody Register register, HttpServletResponse response) {
 		try {
 			return registerService.register(register);

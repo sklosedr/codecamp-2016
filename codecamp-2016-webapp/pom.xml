@@ -14,6 +14,7 @@
 	<artifactId>codecamp-2016-webapp</artifactId>
 
 	<modules>
+		<module>codecamp-2016-frontend-webapp</module>
 		<module>codecamp-2016-backend-webapp</module>
 	</modules>
 	

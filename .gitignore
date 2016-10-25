@@ -5,6 +5,8 @@
 
 # Build
 target/
+node/
+static/
 
 # Eclipse
 .project

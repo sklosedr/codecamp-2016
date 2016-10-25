@@ -34,7 +34,8 @@ import { LoginService } from './login/login.service';
         { path: 'register', component: RegisterComponent },
         { path: 'dogs', component: DogsComponent },
         { path: 'users', component: UsersComponent },
-        { path: 'login', component: LoginComponent }
+        { path: 'login', component: LoginComponent },
+        { path: '', component: RegisterComponent }
     ])
   ],
   providers: [DogsService, RegisterService, LoginService],
