@@ -1,17 +1,17 @@
 kind: Deployment
 apiVersion: extensions/v1beta1
 metadata:
-  name: ccdemo-deploy
+  name: cc-deploy
 spec:
   replicas: 1
   template:
     metadata:
-      name: ccdemo
+      name: cc
       labels:
-        name: ccdemo
+        name: cc
     spec:
       containers:
-      - name: ccdemo-sr
+      - name: cc-sr
         image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-sr
         imagePullPolicy: Always
         readinessProbe:
@@ -20,9 +20,9 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         ports:
-        - name: ccdemo-sr-http
+        - name: cc-sr-http
           containerPort: 8081
-      - name: ccdemo-ds
+      - name: cc-ds
         image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-ds
         imagePullPolicy: Always
         readinessProbe:
@@ -31,9 +31,9 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         ports:
-        - name: ccdemo-ds-http
+        - name: cc-ds-http
           containerPort: 8084
-      - name: ccdemo-rs
+      - name: cc-rs
         image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-rs
         imagePullPolicy: Always
         readinessProbe:
@@ -42,9 +42,9 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         ports:
-        - name: ccdemo-rshttp
+        - name: cc-rshttp
           containerPort: 8082
-      - name: ccdemo-us
+      - name: cc-us
         image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-us
         imagePullPolicy: Always
         readinessProbe:
@@ -53,9 +53,9 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         ports:
-        - name: ccdemo-ushttp
+        - name: cc-ushttp
           containerPort: 8083
-      - name: ccdemo-web
+      - name: cc-web
         image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-web
         imagePullPolicy: Always
         readinessProbe:
@@ -64,5 +64,5 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 5
         ports:
-        - name: ccdemo-webhttp
+        - name: cc-webhttp
           containerPort: 8080
