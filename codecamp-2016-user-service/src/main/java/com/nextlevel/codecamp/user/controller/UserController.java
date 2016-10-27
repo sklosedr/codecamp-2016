@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,22 +25,22 @@ import com.nextlevel.codecamp.user.data.UserRepository;
 		@Autowired
 		private UserRepository userRepository;
 		
-	    @RequestMapping("/")
+	    @GetMapping("/")
 	    public String index() {
 	        return "Greetings from Spring Boot!";
 	    }
 	    
-	    @RequestMapping("/users")
+	    @GetMapping("/users")
 	    public List<DogUser> getAllUsers() {
 	    	return IterableUtils.toList(userRepository.findAll());
 	    }
 	    
-	    @RequestMapping("/user/")
+	    @GetMapping("/user/")
 	    public List<DogUser> getUser(Long id) {
 	    	return IterableUtils.toList(userRepository.findAll());
 	    }
 	    
-	    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	    @PostMapping("/addUser")
 	    @Transactional
 	    public DogUser addUser(@RequestBody DogUser dogUser){
 	    	Long id = dogUser.getId();
@@ -53,7 +53,7 @@ import com.nextlevel.codecamp.user.data.UserRepository;
 	    	return dogUser;
 	    }
 	    
-	    @RequestMapping(value = "/authenticateUser", method = RequestMethod.POST)
+	    @PostMapping("/authenticateUser")
 	    @Transactional
 	    public ResponseEntity<DogUser> authenticate(@RequestParam(value = "username") String username , @RequestParam(value = "password") String password){
 	    	DogUser dogUser = userRepository.findByUsernameAndPassword(username, password);
