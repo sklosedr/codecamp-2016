@@ -1,0 +1,68 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: cc-deploy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: cc
+      labels:
+        name: cc
+    spec:
+      containers:
+      - name: cc-sr
+        image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-sr
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8081
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        ports:
+        - name: cc-sr-http
+          containerPort: 8081
+      - name: cc-ds
+        image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-ds
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8084
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        ports:
+        - name: cc-ds-http
+          containerPort: 8084
+      - name: cc-rs
+        image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-rs
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8082
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        ports:
+        - name: cc-rshttp
+          containerPort: 8082
+      - name: cc-us
+        image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-us
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8083
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        ports:
+        - name: cc-ushttp
+          containerPort: 8083
+      - name: cc-web
+        image: eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0-web
+        imagePullPolicy: Always
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 10
+          timeoutSeconds: 5
+        ports:
+        - name: cc-webhttp
+          containerPort: 8080
