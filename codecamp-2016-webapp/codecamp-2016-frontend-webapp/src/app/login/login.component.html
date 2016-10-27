@@ -1,18 +1,12 @@
 <div class="form">
-	<md-card class="demo-card demo-basic">
-	  <md-toolbar color="primary">Insert your name and password to log in:</md-toolbar>
-	  <md-card-content>
-	    <form (submit)="login($event)">
-	 		<md-input [(ngModel)]="loginModel.username" name="username" placeholder="Username"></md-input>
-			<md-input [(ngModel)]="loginModel.password" name="password" placeholder="Password"></md-input>
-				<p>
-					<button md-raised-button id="loginbutton" type="submit" color="accent" >Log in</button>
-				</p>
-            <md-card-actions>
-		    </md-card-actions>
-	  	</form>
-	  	<a id="goToRegisterLink" (click)="goToRegister()">To create a new user click here!</a>
-
-	  </md-card-content>
-	</md-card>
+	<md-card class="demo-card demo-basic"> <md-toolbar color="primary">Insert your name and password to log in:</md-toolbar> <md-card-content>
+	<form (submit)="login($event)">
+		<md-input [(ngModel)]="loginModel.username" name="username" placeholder="Username"></md-input>
+		<md-input [(ngModel)]="loginModel.password" name="password" placeholder="Password" type="password"></md-input>
+		<p>
+			<button md-raised-button id="loginbutton" type="submit" color="accent">Log in</button>
+		</p>
+		<md-card-actions></md-card-actions>
+	</form>
+	<a id="goToRegisterLink" (click)="goToRegister()">To create a new user click here!</a> </md-card-content> </md-card>
 </div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 import { Login } from './login.model';
 
@@ -7,13 +7,11 @@ import { Login } from './login.model';
 export class LoginService {
   private url = 'http://localhost:8080/login';
     
-  private headers = new Headers({'Content-Type': 'application/json'});
-
   constructor(private http: Http) { }
     
   login(login: Login): Observable<Login> {
     return this.http
-        .post(this.url, JSON.stringify(login), {headers: this.headers})
+        .post(this.url, JSON.stringify(login))
         .map(this.extractData)
         .catch(this.handleError);
   }

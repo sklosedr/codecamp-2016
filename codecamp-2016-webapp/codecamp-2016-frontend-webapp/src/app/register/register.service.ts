@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import { Observable }     from 'rxjs/Observable';
 
@@ -10,13 +10,11 @@ export class RegisterService {
         
   private url = 'http://localhost:8080/register';
     
-  private headers = new Headers({'Content-Type': 'application/json'});
-
   constructor(private http: Http) { }
     
   register(register: Register): Observable<Register> {
     return this.http
-        .post(this.url, JSON.stringify(register), {headers: this.headers})
+        .post(this.url, JSON.stringify(register))
         .map(this.extractData)
         .catch(this.handleError);
   }

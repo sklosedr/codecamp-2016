@@ -2,7 +2,6 @@ package com.nextlevel.codecamp.webapp;
 
 import javax.inject.Inject;
 
-import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -12,7 +11,11 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.nextlevel.codecamp.webapp.security.AjaxAuthenticationFailureHandler;
 import com.nextlevel.codecamp.webapp.security.AjaxAuthenticationSuccessHandler;
@@ -40,25 +43,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Inject
     private UserAuthenticationProvider userAuthenticationProvider;
     
-    @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) {
-        try {
-            auth.authenticationProvider(userAuthenticationProvider);
-        } catch (Exception e) {
-            throw new BeanInitializationException("Security configuration failed", e);
-        }
-    }
-	
-    @Bean
-    public JsonUserNameAuthenticationFilter jsonUserNameAuthenticationFilter() throws Exception {
-    	JsonUserNameAuthenticationFilter jsonFilter = new JsonUserNameAuthenticationFilter();
-    	jsonFilter.setAuthenticationManager(authenticationManager());
-    	jsonFilter.setAuthenticationSuccessHandler(ajaxAuthenticationSuccessHandler);
-    	jsonFilter.setAuthenticationFailureHandler(ajaxAuthenticationFailureHandler);
-        return jsonFilter;
-    }
-
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	auth.authenticationProvider(userAuthenticationProvider);
+    }
+    
+	@Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
@@ -72,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        	.addFilterBefore(corsFilter(), ChannelProcessingFilter.class)
         	.addFilterBefore(jsonUserNameAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
 	        .exceptionHandling()	
 	        .authenticationEntryPoint(authenticationEntryPoint)
@@ -100,5 +91,29 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         	.csrf().disable();
     }
     
-    
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfig());
+		return new CorsFilter(source);
+    }
+
+    @Bean
+    public CorsConfiguration corsConfig() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("http://localhost:4200");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		return config;
+	}
+
+    @Bean
+    public JsonUserNameAuthenticationFilter jsonUserNameAuthenticationFilter() throws Exception {
+    	JsonUserNameAuthenticationFilter jsonFilter = new JsonUserNameAuthenticationFilter();
+    	jsonFilter.setAuthenticationManager(authenticationManager());
+    	jsonFilter.setAuthenticationSuccessHandler(ajaxAuthenticationSuccessHandler);
+    	jsonFilter.setAuthenticationFailureHandler(ajaxAuthenticationFailureHandler);
+        return jsonFilter;
+    }
 }

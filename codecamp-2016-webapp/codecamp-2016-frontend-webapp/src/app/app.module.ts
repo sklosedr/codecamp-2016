@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Http, ConnectionBackend, XHRBackend, RequestOptions, BaseRequestOptions } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
 
@@ -37,7 +37,16 @@ import { LoginService } from './login/login.service';
         { path: 'login', component: LoginComponent }
     ])
   ],
-  providers: [DogsService, RegisterService, LoginService],
+  providers: [DogsService,
+  			  RegisterService,
+  			  LoginService,
+			   {provide: Http,
+				useFactory: (backend: ConnectionBackend, defaultOptions: BaseRequestOptions) => {
+					  defaultOptions.withCredentials = true;
+			  		  defaultOptions.headers.append('Content-Type', 'application/json;charset=UTF-8');
+			  		  defaultOptions.headers.append('Accept', 'application/json;charset=UTF-8');
+			  		  return new Http(backend, defaultOptions)},
+			   			deps: [XHRBackend, RequestOptions]}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -19,8 +19,31 @@
 		<codecamp-2016.version>1.0.0</codecamp-2016.version>
 	</properties>
 	
+	<modules>
+		<module>codecamp-2016-dog-service</module>
+		<module>codecamp-2016-model</module>
+		<module>codecamp-2016-register-service</module>
+		<module>codecamp-2016-user-service</module>
+		<module>codecamp-2016-service-registry</module>
+		<module>codecamp-2016-webapp</module>
+	</modules>
+
 	<dependencyManagement>
 		<dependencies>
+	        <dependency>
+	            <groupId>io.spring.platform</groupId>
+	            <artifactId>platform-bom</artifactId>
+	            <version>Athens-RELEASE</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.springframework.cloud</groupId>
+	            <artifactId>spring-cloud-dependencies</artifactId>
+	            <version>Camden.SR1</version>
+	            <type>pom</type>
+	            <scope>import</scope>
+	        </dependency>
 			<dependency>
 				<artifactId>codecamp-2016-model</artifactId>
 				<groupId>com.next-level-integration</groupId>
@@ -36,25 +59,15 @@
 			    <artifactId>hibernate-jpa-2.1-api</artifactId>
 			    <version>1.0.0.Final</version>
 			</dependency>
-	        <dependency>
-	            <groupId>org.springframework.cloud</groupId>
-	            <artifactId>spring-cloud-dependencies</artifactId>
-	            <version>Brixton.SR6</version>
-	            <type>pom</type>
-	            <scope>import</scope>
-	        </dependency>
 		</dependencies>
 	</dependencyManagement>
     
-
-	<modules>
-		<module>codecamp-2016-dog-service</module>
-		<module>codecamp-2016-model</module>
-		<module>codecamp-2016-register-service</module>
-		<module>codecamp-2016-user-service</module>
-		<module>codecamp-2016-service-registry</module>
-		<module>codecamp-2016-webapp</module>
-	</modules>
-
-    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>    
 </project>    

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import { Observable }     from 'rxjs/Observable';
 
@@ -11,13 +11,11 @@ export class DogsService {
   private url = 'http://localhost:8080/dogs';
   private searchDogsUrl = 'http://localhost:8080/searchDogs';
     
-  private headers = new Headers({'Content-Type': 'application/json'});
-
   constructor(private http: Http) { }
     
   createDog(dog: Dog): Observable<Dog> {
     return this.http
-        .post(this.url, JSON.stringify(dog), {headers: this.headers})
+        .post(this.url, JSON.stringify(dog))
         .map(this.extractData)
         .catch(this.handleError); 
   }
@@ -30,7 +28,7 @@ export class DogsService {
     
     searchDogs(dog: Dog): Observable<Dog[]> {
        return this.http
-        .post(this.searchDogsUrl, JSON.stringify(dog), {headers: this.headers})
+        .post(this.searchDogsUrl, JSON.stringify(dog))
         .map(this.extractData)
         .catch(this.handleError); 
   }
@@ -43,7 +41,7 @@ export class DogsService {
     
     saveDog(dog: Dog): Observable<Dog> {
         return this.http
-        .put(this.url, JSON.stringify(dog), {headers: this.headers})
+        .put(this.url, JSON.stringify(dog))
         .map(this.extractData)
         .catch(this.handleError); 
   }

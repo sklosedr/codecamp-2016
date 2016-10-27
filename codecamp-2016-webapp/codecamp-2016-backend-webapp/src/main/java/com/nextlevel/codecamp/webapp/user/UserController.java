@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 	
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public User getUser() {
 		return new User("Peter Pan");
