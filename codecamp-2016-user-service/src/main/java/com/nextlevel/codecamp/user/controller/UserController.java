@@ -1,14 +1,7 @@
 package com.nextlevel.codecamp.user.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
-import com.nextlevel.codecamp.model.user.DogUser;
-import com.nextlevel.codecamp.user.data.UserRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicToolBarUI.DockingListener;
 import javax.transaction.Transactional;
 
 import org.apache.commons.collections4.IterableUtils;
@@ -17,11 +10,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.nextlevel.codecamp.model.user.DogUser;
+import com.nextlevel.codecamp.user.data.UserRepository;
 
 	@RestController
 	public class UserController {

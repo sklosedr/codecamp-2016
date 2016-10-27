@@ -1,16 +1,19 @@
 package com.nextlevel.codecamp.webapp.user;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nextlevel.codecamp.model.user.DogUser;
+import com.nextlevel.codecamp.webapp.security.SecurityUtils;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public User getUser() {
-		return new User("Peter Pan");
+	@GetMapping
+	public DogUser getUser() {
+		return SecurityUtils.getCurrentUser();
 	}
 
 }
