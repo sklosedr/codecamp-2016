@@ -8,8 +8,8 @@ import { Dog } from './dogs';
 @Injectable()
 export class DogsService {
         
-  private url = 'http://localhost:8080/dogs';
-  private searchDogsUrl = 'http://localhost:8080/searchDogs';
+  private url = 'http://localhost:8080/api/dogs';
+  private searchDogsUrl = 'http://localhost:8080/api/searchDogs';
     
   constructor(private http: Http) { }
     

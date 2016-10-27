@@ -52,6 +52,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
+            .antMatchers("/dogs")
+            .antMatchers("/register")
+            .antMatchers("/login")
             .antMatchers("/*.{html,css,ico}")
             .antMatchers("/app/**/*.{html,js,css}")
             .antMatchers("/assets/**")
@@ -84,8 +87,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .disable()
         .and()
             .authorizeRequests()
-            .antMatchers("/register").permitAll()
-            .antMatchers("/login").permitAll()
+//            .antMatchers("/register").permitAll()
+//            .antMatchers("/login").permitAll()
+//            .antMatchers("/dogs").permitAll()
+            .antMatchers("/api/**").permitAll()
+            .antMatchers("/").permitAll()
             .antMatchers("/**").authenticated()
         .and()
         	.csrf().disable();

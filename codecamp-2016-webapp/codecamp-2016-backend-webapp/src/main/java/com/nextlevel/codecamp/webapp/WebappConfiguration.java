@@ -10,7 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableDiscoveryClient
 @EnableFeignClients
 public class WebappConfiguration extends WebMvcConfigurerAdapter {
-	
+
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
