@@ -52,6 +52,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
+            .antMatchers("/")
+            .antMatchers("/dogs")
+            .antMatchers("/register")
+            .antMatchers("/api/searchDogs")
+            .antMatchers("/api/dogs")
+            .antMatchers("/login")
             .antMatchers("/*.{html,css,ico}")
             .antMatchers("/app/**/*.{html,js,css}")
             .antMatchers("/assets/**")
