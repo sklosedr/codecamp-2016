@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: cc-service
   labels:
-    app: ccd-service
+    app: cc-service
 spec:
   type: LoadBalancer
   ports:
