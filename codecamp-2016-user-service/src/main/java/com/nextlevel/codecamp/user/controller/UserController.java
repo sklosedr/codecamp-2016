@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.apache.commons.collections4.IterableUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,60 +21,64 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nextlevel.codecamp.model.user.DogUser;
 import com.nextlevel.codecamp.user.data.UserRepository;
 
-	@RestController
-	public class UserController {
-		
-		@Autowired
-		private UserRepository userRepository;
-		
-	    @GetMapping("/")
-	    public String index() {
-	        return "Greetings from Spring Boot!";
-	    }
-	    
-	    @GetMapping("/users")
-	    public List<DogUser> getAllUsers() {
-	    	return IterableUtils.toList(userRepository.findAll());
-	    }
-	    
-	    @GetMapping("/user/")
-	    public List<DogUser> getUser(Long id) {
-	    	return IterableUtils.toList(userRepository.findAll());
-	    }
-	    
-	    @PostMapping("/addUser")
-	    @Transactional
-	    public DogUser addUser(@RequestBody DogUser dogUser){
-	    	Long id = dogUser.getId();
-	    	
-	    	if(id != null && userRepository.exists(id)){
-	    		throw new IllegalArgumentException("Cannot create user. User with id " + id + " already exists");
-	    	}
-	    	
-	    	userRepository.save(dogUser);
-	    	return dogUser;
-	    }
-	    
-	    @PostMapping("/authenticateUser")
-	    @Transactional
-	    public ResponseEntity<DogUser> authenticate(@RequestParam(value = "username") String username , @RequestParam(value = "password") String password){
-	    	DogUser dogUser = userRepository.findByUsernameAndPassword(username, password);
-	    	if(dogUser == null){
-	    		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-	    	}
-	    	return ResponseEntity.status(HttpStatus.OK).body(dogUser);
-	    }
+@RestController
+public class UserController {
+	
+	private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
-		@DeleteMapping("/users/{id}")
-		public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-			DogUser dogUser = userRepository.findOne(id);
-	
-			if (dogUser == null) {
-				return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-			}
-			userRepository.delete(id);
-	
-			return ResponseEntity.status(HttpStatus.OK).build();
-	
-		}
+	@Autowired
+	private UserRepository userRepository;
+
+	@GetMapping("/")
+	public String index() {
+		return "Greetings from Spring Boot!";
 	}
+
+	@GetMapping("/users")
+	public List<DogUser> getAllUsers() {
+		return IterableUtils.toList(userRepository.findAll());
+	}
+
+	@GetMapping("/user/")
+	public List<DogUser> getUser(Long id) {
+		return IterableUtils.toList(userRepository.findAll());
+	}
+
+	@PostMapping("/addUser")
+	@Transactional
+	public DogUser addUser(@RequestBody DogUser dogUser) {
+		Long id = dogUser.getId();
+
+		if (id != null && userRepository.exists(id)) {
+			LOGGER.error("Cannot create user. User with id " + id + " already exists");
+			throw new IllegalArgumentException("Cannot create user. User with id " + id + " already exists");
+		}
+
+		userRepository.save(dogUser);
+		return dogUser;
+	}
+
+	@PostMapping("/authenticateUser")
+	@Transactional
+	public ResponseEntity<DogUser> authenticate(@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password) {
+		DogUser dogUser = userRepository.findByUsernameAndPassword(username, password);
+		if (dogUser == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(dogUser);
+	}
+
+	@DeleteMapping("/users/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+		DogUser dogUser = userRepository.findOne(id);
+
+		if (dogUser == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		userRepository.delete(id);
+
+		return ResponseEntity.status(HttpStatus.OK).build();
+
+	}
+}

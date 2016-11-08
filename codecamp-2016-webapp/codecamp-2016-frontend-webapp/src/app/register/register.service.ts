@@ -8,7 +8,7 @@ import { Register } from './register.model';
 @Injectable()
 export class RegisterService {
         
-  private url = 'http://localhost:8080/api/register';
+  private url = '/api/register';
     
   constructor(private http: Http) { }
     

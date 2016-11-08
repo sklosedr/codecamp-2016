@@ -5,7 +5,7 @@ import { Login } from './login.model';
 
 @Injectable()
 export class LoginService {
-  private url = 'http://localhost:8080/login';
+  private url = '/login';
     
   constructor(private http: Http) { }
     

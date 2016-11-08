@@ -5,5 +5,18 @@ eureka:
     registerWithEureka: false
     fetchRegistry: false
 
+hystrix:
+    command:
+      default:
+        execution:
+          isolation:
+            thread:
+              timeoutInMilliseconds: 15000
+              
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 60000
+
 server:
   port: 8081
