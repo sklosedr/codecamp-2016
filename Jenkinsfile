@@ -41,7 +41,7 @@ node('build-slave') {
     stage 'Deploy latest version'
     sh("sed -i.bak 's#eu.gcr.io/GCP_PROJECT/APP_NAME:1.0.0#${imageTag}#' k8s.deployments/app-deployment.yaml")
     sh("kubectl apply -f k8s.deployments/app-deployment.yaml")
-    sh("kubectl apply -f k8s.services/app-service.yaml")
+    //sh("kubectl apply -f k8s.services/app-service.yaml")
     //sh("kubectl expose deployment cc-deploy --type=LoadBalancer --name=cc-service")
     
     
